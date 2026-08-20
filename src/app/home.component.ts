@@ -1,0 +1,8 @@
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { HeaderComponent } from './shared.component';
+
+@Component({ selector: 'utn-home', standalone: true, imports: [RouterLink, HeaderComponent], template: `
+<utn-header /><main class="page home"><section class="hero"><p class="eyebrow">Universidad Tecnológica Nacional · FRSN</p><h1>Oferta tecnológica</h1><p>Conocimiento aplicado, formación y servicios para transformar desafíos en oportunidades.</p></section>
+<section class="tile-grid"><a routerLink="/vinculacion" class="tile"><img src="/secretaria-extension-universitaria-main/assets/FONDO%20UTN.jpg" alt="Vinculación tecnológica"><h2>Vinculación e Innovación Tecnológica</h2><p>Asistencia, capacitación, certificación y transferencia para empresas e instituciones.</p><span>Ver propuesta</span></a><a routerLink="/lea" class="tile"><img src="/pagina-lea/assets/lea-fondo.jfif" alt="Laboratorio de estudios ambientales"><h2>LEA</h2><p>Laboratorio de Estudios Ambientales, análisis y servicios especializados.</p><span>Entrar al LEA</span></a><a routerLink="/secretaria" class="tile"><img src="/secretaria-extension-universitaria-main/assets/cursos%20para%20empresas%20y%20comunidad.jpg" alt="Secretaría de Extensión"><h2>Secretaría de Extensión Universitaria</h2><p>Capacitación, cultura y programas para la comunidad.</p><span>Conocer la Secretaría</span></a></section></main>` })
+export class HomeComponent {}

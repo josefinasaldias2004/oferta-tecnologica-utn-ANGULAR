@@ -1,0 +1,6 @@
+import { Component } from '@angular/core';
+import { HeaderComponent, ContactComponent } from './shared.component';
+
+@Component({ selector: 'utn-extension', standalone: true, imports: [HeaderComponent, ContactComponent], template: `
+<utn-header /><main class="page"><section class="hero image-hero"><p class="eyebrow">Comunidad · Cultura · Capacitación</p><h1>Secretaría de Extensión Universitaria y Cultura</h1><p>Promovemos la vinculación entre la Universidad y la comunidad, fortaleciendo el desarrollo social, económico y cultural de la región.</p></section><section class="content"><h2>Capacitación y cursos</h2><div class="cards"><article><h3>Cursos para empresas</h3><p>Buenas prácticas, gestión de calidad, formación técnica y propuestas a medida.</p></article><article><h3>Formación docente</h3><p>Jornadas sobre sustentabilidad, tecnologías educativas e inteligencia artificial.</p></article><article><h3>PUAPAM</h3><p>Programa Universidad Abierta para Adultos Mayores, con actividades de inclusión educativa.</p></article><article><h3>Formación virtual y SIED</h3><p>Cursos autogestionados y capacitaciones en plataformas virtuales con certificados digitales.</p></article></div></section><utn-contact email="extension@frsn.utn.edu.ar" /></main>` })
+export class ExtensionComponent {}

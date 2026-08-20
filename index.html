@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oferta tecnológica</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --utn-navy: #071428;
+        --utn-dark: #0f172a;
+        --utn-orange: #f97316;
+        --muted: #475569;
+        color-scheme: light;
+        font-family: Montserrat, Inter, Arial, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+        color: var(--utn-dark);
+        padding: 36px 20px;
+        -webkit-font-smoothing:antialiased;
+      }
+
+      .topbar {
+        max-width: 1200px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        border-radius: 12px;
+        background: var(--utn-navy);
+        color: #fff;
+        box-shadow: 0 8px 30px rgba(7,20,40,0.12);
+      }
+
+      .brand-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .brand-link img {
+        width: 54px;
+        height: 54px;
+        object-fit: contain;
+        background: #fff;
+        border-radius: 6px;
+        padding: 4px;
+      }
+
+      .page { max-width: 1200px; margin: 0 auto; }
+
+      .hero { text-align: center; padding: 28px 0 36px; }
+
+      .hero h1 { margin: 0 0 8px; font-size: clamp(2rem, 3.6vw, 3rem); color: var(--utn-navy); }
+
+      .hero h2 { margin: 0 0 10px; color: var(--muted); font-weight: 600; }
+
+      .hero p { margin: 0 auto; max-width: 720px; font-size: 1.05rem; line-height: 1.7; color: #344054; }
+
+      .options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+
+      .option {
+        display: flex; flex-direction: column; overflow: hidden; border-radius: 12px;
+        background: #ffffff; color: var(--utn-dark); text-decoration: none; position: relative;
+        box-shadow: 0 12px 30px rgba(2, 8, 23, 0.06); transition: transform 0.18s ease, box-shadow 0.18s ease;
+        border-left: 6px solid transparent;
+      }
+
+      .option::before {
+        content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, var(--utn-orange), #ff8a3d);
+      }
+
+      .option:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(2,8,23,0.08); }
+
+      .option img { width: 100%; height: 220px; object-fit: cover; display: block; }
+
+      .option-content { padding: 18px 20px 22px; }
+
+      .option-content h2 { margin: 0 0 8px; font-size: 1.2rem; color: var(--utn-navy); }
+
+      .option-content p { margin: 0 0 16px; color: var(--muted); line-height: 1.6; }
+
+      .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 14px; border-radius: 999px; background: var(--utn-orange); color: #fff; font-weight: 800; text-decoration: none; }
+
+      @media (max-width: 760px) { .options { grid-template-columns: 1fr; } .topbar { padding: 12px; } }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <a class="brand-link" href="index.html" aria-label="Volver a la portada">
+        <img src="pagina-lea/assets/logo-UTN.svg" alt="Logo UTN" />
+        <span>UTN FRSN · Portada institucional</span>
+      </a>
+    </div>
+
+    <div class="page">
+      <section class="hero">
+        <h1>Oferta tecnológica</h1>
+        <h2>¿Como podemos ayudarte?</h2>
+        <p>Elegí la sección que querés visitar y accedé directamente a la portada de cada una de las propuestas.</p>
+      </section>
+
+      <div class="options">
+        <a class="option" href="vinculacion.html">
+          <img src="secretaria-extension-universitaria-main/assets/FONDO UTN.jpg" alt="Página de vinculación" />
+          <div class="option-content">
+            <h2>Secretaría de Vinculación e Innovación Tecnológica</h2>
+            <p>Una propuesta integral con información de extensión universitaria, capacitación y transferencia de conocimiento.</p>
+            <span class="btn">Ver la propuesta</span>
+          </div>
+        </a>
+
+        <a class="option" href="pagina-lea/index.html">
+          <img src="pagina-lea/assets/lea-fondo.jfif" alt="Portada del LEA" />
+          <div class="option-content">
+            <h2>LEA</h2>
+            <p>Laboratorio de Estudios Ambientales con información institucional, servicios y contacto.</p>
+            <span class="btn">Entrar al LEA</span>
+          </div>
+        </a>
+
+        <a class="option" href="secretaria-extension-universitaria-main/index.html">
+          <img src="secretaria-extension-universitaria-main/assets/FONDO UTN.jpg" alt="Portada de la Secretaría de Extensión Universitaria" />
+          <div class="option-content">
+            <h2>Secretaría de Extensión Universitaria</h2>
+            <p>Programas, capacitaciones, admisiones y contenido institucional de la Secretaría.</p>
+            <span class="btn">Entrar a la Secretaría</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

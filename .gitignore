@@ -4,3 +4,12 @@ dist/
 out-tsc/
 .vscode/
 *.log
+tmp/
+coverage/
+e2e/test-output/
+.env
+.ng/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

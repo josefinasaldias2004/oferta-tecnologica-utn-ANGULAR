@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './shared.component';
 
 interface ResearchGroup {
@@ -95,7 +96,7 @@ const GROUPS: ResearchGroup[] = [
 @Component({
   selector: 'utn-research-groups',
   standalone: true,
-  imports: [HeaderComponent, NgIf],
+  imports: [HeaderComponent, NgIf, FormsModule],
   template: `
     <utn-header />
     <main class="research-page">
@@ -106,16 +107,34 @@ const GROUPS: ResearchGroup[] = [
         <p>Para su formación, los grupos UTN deben estar integrados por docentes investigadores que tengan un rumbo definido para su actividad en I+D+i y hayan demostrado capacidad para fijar por sí mismos sus objetivos en el campo elegido.</p>
       </section>
       <section class="research-content">
-        <div class="research-heading"><p class="eyebrow">Investigación aplicada</p><h2>Conocimiento que transforma la región</h2><p>{{ groups.length }} grupos, líneas de trabajo y servicios especializados desde la UTN Facultad Regional San Nicolás.</p></div>
+        <div class="research-heading"><p class="eyebrow">Investigación aplicada</p><h2>Conocimiento que transforma la región</h2><p>{{ filteredGroups.length }} de {{ groups.length }} grupos, líneas de trabajo y servicios especializados desde la UTN Facultad Regional San Nicolás.</p><div class="research-filters"><label>Buscar grupos<input [(ngModel)]="searchTerm" type="search" placeholder="Nombre, área o responsable" /></label><label>Departamento<select [(ngModel)]="selectedDepartment"><option value="Todos">Todos los departamentos</option>@for (department of departments; track department) {<option [value]="department">{{ department }}</option>}</select></label></div></div>
         <div class="research-list">
-          @for (group of groups; track group.name) {
+          @for (group of filteredGroups; track group.name) {
             <article class="research-card">
               <div class="research-image" [class]="'image-' + group.image" role="img" [attr.aria-label]="'Imagen temática de ' + group.name"><span></span></div>
               <div class="research-card-body"><p class="department">{{ group.department }}</p><h3>{{ group.name }}<small *ngIf="group.acronym"> · {{ group.acronym }}</small></h3><div class="research-meta"><strong>Responsable:</strong> {{ group.responsible }}<a [href]="'mailto:' + group.email">{{ group.email }}</a></div><p>{{ group.description }}</p><a *ngIf="group.link" class="external-link" [href]="group.link" target="_blank" rel="noopener">Visitar sitio del grupo</a></div>
             </article>
           }
         </div>
+        @if (!filteredGroups.length) { <p class="empty-state">No encontramos grupos con esos criterios.</p> }
       </section>
     </main>`
 })
-export class ResearchGroupsComponent { groups = GROUPS; }
+export class ResearchGroupsComponent {
+  groups = GROUPS;
+  searchTerm = '';
+  selectedDepartment = 'Todos';
+
+  get departments(): string[] {
+    return [...new Set(this.groups.map((group) => group.department))];
+  }
+
+  get filteredGroups(): ResearchGroup[] {
+    const query = this.searchTerm.trim().toLocaleLowerCase();
+    return this.groups.filter((group) => {
+      const matchesDepartment = this.selectedDepartment === 'Todos' || group.department === this.selectedDepartment;
+      const searchableText = `${group.name} ${group.acronym ?? ''} ${group.responsible} ${group.description}`.toLocaleLowerCase();
+      return matchesDepartment && (!query || searchableText.includes(query));
+    });
+  }
+}

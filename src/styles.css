@@ -1,12 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap");
-.legacy-frame {
-  display: block;
-  width: 100%;
-  min-height: 100vh;
-  height: 100vh;
-  border: 0;
-  background: #fff;
-}
 :root {
   --ink: #102a43;
   --blue: #1363df;
@@ -17,11 +9,21 @@
   color: var(--ink);
   background: var(--paper);
 }
+:root.dark-theme {
+  --ink: #edf4fb;
+  --paper: #0b1726;
+  --muted: #b8c8d8;
+  --blue: #73b7ff;
+  background: var(--paper);
+}
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  transition: background 180ms ease, color 180ms ease;
 }
 a {
   color: inherit;
@@ -59,6 +61,31 @@ nav {
 nav a {
   text-decoration: none;
   font-size: 0.95rem;
+  padding: 8px 0;
+  border-bottom: 2px solid transparent;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.theme-toggle {
+  padding: 8px 11px;
+  border: 1px solid #ffffff66;
+  background: transparent;
+  color: white;
+  font-size: 0.85rem;
+}
+nav a.active,
+nav a:hover {
+  border-color: var(--orange);
+}
+.menu-toggle {
+  display: none;
+  padding: 8px 12px;
+  background: transparent;
+  color: white;
+  font-size: 1.35rem;
 }
 .page {
   max-width: 1180px;
@@ -91,6 +118,65 @@ nav a {
 }
 .content {
   padding: 68px 6vw;
+}
+.service-hero {
+  background:
+    linear-gradient(135deg, #071428dd, #176b87dd),
+    url("/secretaria-extension-universitaria-main/assets/FONDO%20UTN.jpg") center/cover;
+  color: white;
+}
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.hero-trust span {
+  padding: 8px 12px;
+  border: 1px solid #ffffff40;
+  background: #ffffff18;
+  color: white;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+.b2b-grid,
+.value-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 22px;
+}
+.value-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+.highlight-card {
+  background: linear-gradient(135deg, white, #fff7ed);
+}
+.alt-band {
+  background: #e7f0ff;
+}
+.value-card {
+  padding: 22px;
+  background: white;
+  border-top: 4px solid var(--blue);
+  box-shadow: 0 12px 24px #102a4312;
+}
+.contact-layout {
+  grid-template-columns: 1fr 1fr;
+}
+fieldset {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #ffffff44;
+}
+fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+}
+fieldset input[type="radio"] {
+  width: auto;
 }
 h2,
 h3 {
@@ -137,6 +223,53 @@ h3 {
 button {
   color: var(--blue);
   font-weight: 700;
+}
+:root.dark-theme .hero:not(.image-hero),
+:root.dark-theme .content,
+:root.dark-theme .research-content {
+  background: var(--paper);
+}
+:root.dark-theme .hero p:not(.eyebrow),
+:root.dark-theme .tile p,
+:root.dark-theme .service-card p,
+:root.dark-theme .cards p,
+:root.dark-theme .content > p,
+:root.dark-theme .research-heading p:not(.eyebrow),
+:root.dark-theme .research-card-body > p:not(.department) {
+  color: var(--muted);
+}
+:root.dark-theme .tile,
+:root.dark-theme .service-card,
+:root.dark-theme .cards article,
+:root.dark-theme .research-card,
+:root.dark-theme .research-filters input,
+:root.dark-theme .research-filters select,
+:root.dark-theme .empty-state {
+  background: #14283d;
+  color: var(--ink);
+}
+:root.dark-theme input,
+:root.dark-theme textarea,
+:root.dark-theme select {
+  background: #14283d;
+  color: var(--ink);
+  border-color: #557089;
+}
+:root.dark-theme .image-hero {
+  background:
+    linear-gradient(135deg, #071428dd, #173b5cdd),
+    url("/secretaria-extension-universitaria-main/assets/FONDO%20UTN.jpg") center/cover;
+}
+:root.dark-theme .research-page,
+:root.dark-theme .dark-extension {
+  background: var(--paper);
+  color: var(--ink);
+}
+:root.dark-theme .alt-band,
+:root.dark-theme .value-card,
+:root.dark-theme .highlight-card {
+  background: #14283d;
+  color: var(--ink);
 }
 .service-grid {
   padding: 20px 0;
@@ -196,14 +329,24 @@ button {
   font: inherit;
 }
 @media (max-width: 760px) {
-  .topbar,
+  .topbar {
+    position: relative;
+  }
+  .menu-toggle {
+    display: block;
+  }
   .contact,
   .split {
     display: block;
   }
   nav {
+    display: none;
+    width: 100%;
     margin-top: 15px;
     gap: 12px;
+  }
+  nav.open {
+    display: grid;
   }
   .tile-grid,
   .service-grid,
@@ -214,6 +357,18 @@ button {
   }
   .hero {
     padding-top: 60px;
+  }
+  .b2b-grid,
+  .value-grid,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+  .research-filters,
+  .research-filters label,
+  .research-filters input,
+  .research-filters select {
+    width: 100%;
+    min-width: 0;
   }
 }
 
@@ -232,42 +387,297 @@ button {
 .research-image::after {
   content: "";
   position: absolute;
-  border: 1px solid rgba(255,255,255,.52);
+  border: 1px solid rgba(255, 255, 255, 0.52);
   border-radius: 50%;
 }
 .research-tile-art::before,
-.research-image::before { width: 210px; height: 210px; top: -65px; right: -30px; }
+.research-image::before {
+  width: 210px;
+  height: 210px;
+  top: -65px;
+  right: -30px;
+}
 .research-tile-art::after,
-.research-image span { content: ""; position: absolute; width: 72px; height: 72px; left: 22%; top: 31%; border: 3px solid #f9c74f; transform: rotate(45deg); box-shadow: 55px 28px 0 -20px #55d6be, -55px 40px 0 -20px #f97316; }
-.research-page { background: #f4f7fb; color: var(--ink); }
-.research-hero { padding: 92px 8vw 70px; color: #fff; background: radial-gradient(circle at 82% 18%, #246bb8 0 12%, transparent 13%), linear-gradient(125deg, #071428 0%, #102a43 62%, #176b87 100%); }
-.research-hero h1 { max-width: 900px; margin: 12px 0 18px; font: 700 clamp(2.7rem, 7vw, 5.5rem)/1 "Space Grotesk", sans-serif; }
-.research-hero p:not(.eyebrow) { max-width: 900px; color: #d7e6f4; line-height: 1.75; font-size: 1.06rem; }
-.research-content { max-width: 1240px; margin: auto; padding: 76px 6vw; }
-.research-heading { max-width: 760px; margin-bottom: 40px; }
-.research-heading h2 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3.3rem); }
-.research-heading p:not(.eyebrow) { color: var(--muted); line-height: 1.65; }
-.research-list { display: grid; gap: 28px; }
-.research-card { display: grid; grid-template-columns: 260px 1fr; overflow: hidden; background: #fff; border-left: 6px solid var(--orange); box-shadow: 0 16px 35px rgba(16,42,67,.09); }
-.research-image { min-height: 250px; }
-.research-card-body { padding: 28px 32px 30px; }
-.department { margin: 0 0 6px; color: var(--orange); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-.research-card h3 { margin: 0 0 14px; font-size: 1.55rem; }
-.research-card h3 small { color: var(--blue); font-size: .9em; }
-.research-meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 15px; font-size: .92rem; }
-.research-meta a, .external-link { color: var(--blue); font-weight: 700; text-decoration: none; }
-.research-card-body > p:not(.department) { color: var(--muted); line-height: 1.75; white-space: normal; }
-.external-link { display: inline-block; margin-top: 4px; }
-.image-education, .image-mobile-learning { background: linear-gradient(135deg,#1e3a8a,#22c1c3); }
-.image-environment, .image-renewable { background: linear-gradient(135deg,#14532d,#84cc16); }
-.image-heat, .image-process { background: linear-gradient(135deg,#7c2d12,#f97316); }
-.image-metallurgy, .image-ceramics { background: linear-gradient(135deg,#334155,#c08457); }
-.image-biomedical { background: linear-gradient(135deg,#075985,#67e8f9); }
-.image-control, .image-optimization { background: linear-gradient(135deg,#312e81,#38bdf8); }
-.image-robotics, .image-machines { background: linear-gradient(135deg,#172554,#64748b); }
-.image-communications { background: linear-gradient(135deg,#164e63,#a5f3fc); }
-.image-energy { background: linear-gradient(135deg,#713f12,#facc15); }
-.image-vibrations { background: linear-gradient(135deg,#3f3f46,#f43f5e); }
-.image-mechanical { background: linear-gradient(135deg,#1f2937,#94a3b8); }
-.image-organizations, .image-improvement { background: linear-gradient(135deg,#134e4a,#2dd4bf); }
-@media (max-width: 760px) { .research-card { grid-template-columns: 1fr; } .research-image { min-height: 180px; } .research-card-body { padding: 24px; } }
+.research-image span {
+  content: "";
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  left: 22%;
+  top: 31%;
+  border: 3px solid #f9c74f;
+  transform: rotate(45deg);
+  box-shadow:
+    55px 28px 0 -20px #55d6be,
+    -55px 40px 0 -20px #f97316;
+}
+.research-page {
+  background: #f4f7fb;
+  color: var(--ink);
+}
+.research-hero {
+  padding: 92px 8vw 70px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 82% 18%, #246bb8 0 12%, transparent 13%),
+    linear-gradient(125deg, #071428 0%, #102a43 62%, #176b87 100%);
+}
+.research-hero h1 {
+  max-width: 900px;
+  margin: 12px 0 18px;
+  font:
+    700 clamp(2.7rem, 7vw, 5.5rem)/1 "Space Grotesk",
+    sans-serif;
+}
+.research-hero p:not(.eyebrow) {
+  max-width: 900px;
+  color: #d7e6f4;
+  line-height: 1.75;
+  font-size: 1.06rem;
+}
+.research-content {
+  max-width: 1240px;
+  margin: auto;
+  padding: 76px 6vw;
+}
+.research-heading {
+  max-width: 760px;
+  margin-bottom: 40px;
+}
+.research-heading h2 {
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+}
+.research-heading p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.65;
+}
+.research-list {
+  display: grid;
+  gap: 28px;
+}
+.research-card {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  overflow: hidden;
+  background: #fff;
+  border-left: 6px solid var(--orange);
+  box-shadow: 0 16px 35px rgba(16, 42, 67, 0.09);
+}
+.research-image {
+  min-height: 250px;
+}
+.research-card-body {
+  padding: 28px 32px 30px;
+}
+.department {
+  margin: 0 0 6px;
+  color: var(--orange);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.research-card h3 {
+  margin: 0 0 14px;
+  font-size: 1.55rem;
+}
+.research-card h3 small {
+  color: var(--blue);
+  font-size: 0.9em;
+}
+.research-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-bottom: 15px;
+  font-size: 0.92rem;
+}
+.research-meta a,
+.external-link {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+.research-card-body > p:not(.department) {
+  color: var(--muted);
+  line-height: 1.75;
+  white-space: normal;
+}
+.external-link {
+  display: inline-block;
+  margin-top: 4px;
+}
+.image-education,
+.image-mobile-learning {
+  background: linear-gradient(135deg, #1e3a8a, #22c1c3);
+}
+.image-environment,
+.image-renewable {
+  background: linear-gradient(135deg, #14532d, #84cc16);
+}
+.image-heat,
+.image-process {
+  background: linear-gradient(135deg, #7c2d12, #f97316);
+}
+.image-metallurgy,
+.image-ceramics {
+  background: linear-gradient(135deg, #334155, #c08457);
+}
+.image-biomedical {
+  background: linear-gradient(135deg, #075985, #67e8f9);
+}
+.image-control,
+.image-optimization {
+  background: linear-gradient(135deg, #312e81, #38bdf8);
+}
+.image-robotics,
+.image-machines {
+  background: linear-gradient(135deg, #172554, #64748b);
+}
+.image-communications {
+  background: linear-gradient(135deg, #164e63, #a5f3fc);
+}
+.image-energy {
+  background: linear-gradient(135deg, #713f12, #facc15);
+}
+.image-vibrations {
+  background: linear-gradient(135deg, #3f3f46, #f43f5e);
+}
+.image-mechanical {
+  background: linear-gradient(135deg, #1f2937, #94a3b8);
+}
+.image-organizations,
+.image-improvement {
+  background: linear-gradient(135deg, #134e4a, #2dd4bf);
+}
+@media (max-width: 760px) {
+  .research-card {
+    grid-template-columns: 1fr;
+  }
+  .research-image {
+    min-height: 180px;
+  }
+  .research-card-body {
+    padding: 24px;
+  }
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.feature-img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 28px;
+}
+.detail .cards {
+  padding: 20px 0;
+}
+.detail .cards article {
+  min-height: 100%;
+}
+.contact a {
+  color: #ffd6b0;
+  font-weight: 700;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 6vw;
+  background: #071428;
+  color: #fff;
+  font-size: 0.9rem;
+}
+.footer-info {
+  display: grid;
+  gap: 6px;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: 16px;
+}
+.footer-links a {
+  color: #d7e6f4;
+  text-decoration: none;
+}
+.footer-links a:hover {
+  color: white;
+}
+.not-found {
+  min-height: 65vh;
+  padding-top: 120px;
+}
+.not-found h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  margin: 8px 0 16px;
+}
+.not-found p:not(.eyebrow) {
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+.research-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+.research-filters label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.research-filters input,
+.research-filters select {
+  min-width: 250px;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+}
+.empty-state {
+  padding: 24px;
+  background: white;
+  color: var(--muted);
+  border-left: 5px solid var(--orange);
+}
+.extension-page .cards img {
+  width: calc(100% + 44px);
+  height: 170px;
+  object-fit: cover;
+  margin: -22px -22px 16px;
+}
+.dark-extension {
+  background: #102a43;
+  color: #f8fafc;
+}
+.dark-extension .content,
+.dark-extension .cards article {
+  background: #173b5c;
+  color: #f8fafc;
+}
+.dark-extension .cards p,
+.dark-extension .content > p {
+  color: #d7e6f4;
+}
+@media (max-width: 760px) {
+  .footer {
+    display: block;
+  }
+  .footer > div + div {
+    margin-top: 18px;
+  }
+  .container {
+    width: 100%;
+  }
+}

@@ -19,14 +19,20 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/assets",
-              { "glob": "index.html", "input": ".", "output": "legacy" },
-              { "glob": "vinculacion.html", "input": ".", "output": "legacy" },
-              { "glob": "**/*", "input": "pagina-lea", "output": "legacy/pagina-lea" },
-              { "glob": "**/*", "input": "secretaria-extension-universitaria-main", "output": "legacy/secretaria-extension-universitaria-main" },
-              { "glob": "**/*", "input": "vinculacion", "output": "legacy/vinculacion" },
+              { "glob": "index.html", "input": ".", "output": "content" },
+              { "glob": "vinculacion.html", "input": ".", "output": "content" },
+              { "glob": "**/*.html", "input": "pagina-lea", "output": "content/pagina-lea" },
+              { "glob": "**/*.html", "input": "secretaria-extension-universitaria-main", "output": "content/secretaria-extension-universitaria-main" },
+              { "glob": "**/*.html", "input": "vinculacion", "output": "content/vinculacion" },
+              { "glob": "styles.css", "input": "pagina-lea", "output": "content/pagina-lea" },
+              { "glob": "styles.css", "input": "secretaria-extension-universitaria-main", "output": "content/secretaria-extension-universitaria-main" },
+              { "glob": "styles.css", "input": "vinculacion", "output": "content/vinculacion" },
               { "glob": "**/*", "input": "pagina-lea/assets", "output": "pagina-lea/assets" },
               { "glob": "**/*", "input": "secretaria-extension-universitaria-main/assets", "output": "secretaria-extension-universitaria-main/assets" },
-              { "glob": "**/*", "input": "vinculacion/assets", "output": "vinculacion/assets" }
+              { "glob": "**/*", "input": "vinculacion/assets", "output": "vinculacion/assets" },
+              { "glob": "**/*", "input": "pagina-lea/assets", "output": "content/pagina-lea/assets" },
+              { "glob": "**/*", "input": "secretaria-extension-universitaria-main/assets", "output": "content/secretaria-extension-universitaria-main/assets" },
+              { "glob": "**/*", "input": "vinculacion/assets", "output": "content/vinculacion/assets" }
             ],
             "styles": ["src/styles.css"]
           },

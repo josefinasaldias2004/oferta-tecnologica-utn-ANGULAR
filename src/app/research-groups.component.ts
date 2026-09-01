@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './shared.component';
+import { HeaderComponent, SearchBarComponent } from './shared.component';
 
 interface ResearchGroup {
   department: string;
@@ -96,7 +96,7 @@ const GROUPS: ResearchGroup[] = [
 @Component({
   selector: 'utn-research-groups',
   standalone: true,
-  imports: [HeaderComponent, NgIf, FormsModule],
+  imports: [HeaderComponent, SearchBarComponent, NgIf, FormsModule],
   template: `
     <utn-header />
     <main class="research-page">
@@ -105,6 +105,7 @@ const GROUPS: ResearchGroup[] = [
         <h1>Grupos de Investigación</h1>
         <p>Los Grupos de Investigación y Desarrollo UTN dependen directamente de la Secretaria de Ciencia y Tecnología y gozan de autonomía en el aspecto científico y tecnológico, estando a su cargo la formulación de los planes de trabajo. Anualmente eleva una memoria para la aprobación de la Secretaria de Ciencia y Tecnología. Juntamente se eleva el programa de actividades del año entrante.</p>
         <p>Para su formación, los grupos UTN deben estar integrados por docentes investigadores que tengan un rumbo definido para su actividad en I+D+i y hayan demostrado capacidad para fijar por sí mismos sus objetivos en el campo elegido.</p>
+        <utn-search-bar />
       </section>
       <section class="research-content">
         <div class="research-heading"><p class="eyebrow">Investigación aplicada</p><h2>Conocimiento que transforma la región</h2><p>{{ filteredGroups.length }} de {{ groups.length }} grupos, líneas de trabajo y servicios especializados desde la UTN Facultad Regional San Nicolás.</p><div class="research-filters"><label>Buscar grupos<input [(ngModel)]="searchTerm" type="search" placeholder="Nombre, área o responsable" /></label><label>Departamento<select [(ngModel)]="selectedDepartment"><option value="Todos">Todos los departamentos</option>@for (department of departments; track department) {<option [value]="department">{{ department }}</option>}</select></label></div></div>

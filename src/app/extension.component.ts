@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './shared.component';
+import { HeaderComponent, SearchBarComponent } from './shared.component';
 
 interface ExtensionCard { title: string; text: string; image?: string; }
 
 @Component({
   selector: 'utn-extension',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf, HeaderComponent],
+  imports: [FormsModule, NgFor, NgIf, HeaderComponent, SearchBarComponent],
   template: `
     <utn-header />
     <main class="page extension-page">
-      <section class="hero image-hero"><p class="eyebrow">Comunidad · Cultura · Capacitación</p><h1>Secretaría de Extensión Universitaria y Cultura</h1><p>Promovemos la vinculación entre la Universidad y la comunidad, fortaleciendo el desarrollo social, económico y cultural de la región.</p><div class="actions"><a class="btn primary" href="#admisiones">Admisiones 2026</a><a class="btn secondary" href="#cursos">Ver cursos</a></div></section>
+      <section class="hero image-hero"><p class="eyebrow">Comunidad · Cultura · Capacitación</p><h1>Secretaría de Extensión Universitaria y Cultura</h1><p>Promovemos la vinculación entre la Universidad y la comunidad, fortaleciendo el desarrollo social, económico y cultural de la región.</p><div class="actions"><a class="btn primary" href="#admisiones">Admisiones 2026</a><a class="btn secondary" href="#cursos">Ver cursos</a></div><utn-search-bar /></section>
       <section class="content"><h2>Sobre la Secretaría</h2><p>La Secretaría de Extensión Universitaria y Cultura impulsa la participación de la comunidad universitaria y fortalece el vínculo con el ámbito socioproductivo, cultural y social.</p><div class="cards"><article><h3>Misión</h3><p>Transferir conocimientos y capacidades para contribuir al desarrollo social, económico y cultural.</p></article><article><h3>Visión</h3><p>Construir una universidad abierta, comprometida con su territorio y conectada con sus instituciones.</p></article><article><h3>Objetivos</h3><p>Promover convenios, capacitación, proyectos y relaciones con instituciones culturales y sociales.</p></article></div></section>
       <section class="content"><h2>Funciones y áreas</h2><div class="cards"><article *ngFor="let area of areas"><h3>{{ area.title }}</h3><p>{{ area.text }}</p></article></div></section>
       <section class="content" id="cursos"><h2>Capacitación y cursos</h2><div class="cards"><article *ngFor="let card of courses"><img *ngIf="card.image" [src]="card.image" [alt]="card.title"><h3>{{ card.title }}</h3><p>{{ card.text }}</p></article></div></section>

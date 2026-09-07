@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from './shared.component';
@@ -17,12 +17,16 @@ interface SearchOption {
   template: `
     <utn-header />
     <main class="page home">
-      <section class="hero">
-        <p class="eyebrow">Universidad Tecnológica Nacional · FRSN</p>
-        <h1>Oferta tecnológica</h1>
-        <p>Conocimiento aplicado, formación y servicios para transformar desafíos en oportunidades.</p>
+      <section class="hero home-hero">
+        <div class="home-hero-slides" aria-hidden="true">
+          <img *ngFor="let image of heroImages; let index = index" [class.active]="index === activeHeroSlide" [src]="image" alt="">
+        </div>
+        <div class="home-hero-content">
+          <p class="eyebrow">Universidad Tecnológica Nacional · FRSN</p>
+          <h1>Oferta tecnológica</h1>
+          <p>Conocimiento aplicado, formación y servicios para transformar desafíos en oportunidades.</p>
 
-        <div class="search-panel">
+          <div class="search-panel">
           <div class="search-box" role="search">
             <input
               type="search"
@@ -49,10 +53,8 @@ interface SearchOption {
           </div>
 
           <div class="search-hints">
-            <span>Vinculación</span>
-            <span>LEA</span>
-            <span>Extensión</span>
-            <span>Investigación</span>
+            <button *ngFor="let hint of searchHints" type="button" (click)="selectHint(hint)">{{ hint }}</button>
+          </div>
           </div>
         </div>
       </section>
@@ -86,10 +88,25 @@ interface SearchOption {
     </main>
   `
 })
-export class HomeComponent {
+export class HomeComponent implements OnDestroy {
   query = '';
   matches: SearchOption[] = [];
   showSuggestions = false;
+  searchHints = ['Vinculación', 'LEA', 'Extensión', 'Investigación'];
+  activeHeroSlide = 0;
+  heroImages = [
+    '/vinculacion/assets/FONDO%20UTN.jpg',
+    '/vinculacion/assets/asesoramiento-tecnico.jpg',
+    '/vinculacion/assets/capacitaciones-in-company.jpg',
+    '/vinculacion/assets/capacitaciones-abiertas.jpg',
+    '/vinculacion/assets/centro-soldadura.jpg',
+    '/vinculacion/assets/certificacion-oficios.jpg',
+    '/vinculacion/assets/citi.png',
+    '/vinculacion/assets/auditoria-tanques.jpg'
+  ];
+  private readonly heroSlideTimer = window.setInterval(() => {
+    this.activeHeroSlide = (this.activeHeroSlide + 1) % this.heroImages.length;
+  }, 5500);
 
   private readonly searchOptions: SearchOption[] = [
     {
@@ -145,14 +162,23 @@ export class HomeComponent {
 
     if (match) {
       this.selectSuggestion(match);
+      this.router.navigateByUrl(match.route);
       return;
     }
+  }
+
+  selectHint(hint: string): void {
+    this.query = hint;
+    this.onSearchInput();
   }
 
   selectSuggestion(option: SearchOption): void {
     this.query = option.label;
     this.matches = [];
     this.showSuggestions = false;
-    this.router.navigateByUrl(option.route);
+  }
+
+  ngOnDestroy(): void {
+    window.clearInterval(this.heroSlideTimer);
   }
 }

@@ -4,11 +4,17 @@ import { NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent, SearchBarComponent } from './shared.component';
 import { SERVICES } from './vinculacion.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'utn-vinculacion-home',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf, RouterLink, HeaderComponent, SearchBarComponent],
+  imports: [FormsModule, NgFor, NgIf, RouterLink, HeaderComponent, SearchBarComponent, MatButtonModule, MatCardModule, MatChipsModule, MatFormFieldModule, MatInputModule, MatRadioModule],
   template: `
     <utn-header />
     <main class="page vinc-page">
@@ -17,7 +23,7 @@ import { SERVICES } from './vinculacion.component';
           <p class="eyebrow">Soluciones para empresas, instituciones y organizaciones</p>
           <h1>Innovación, formación y tecnología al servicio de tu negocio</h1>
           <p>La Secretaría de Vinculación e Innovación Tecnológica de la UTN FRSN conecta empresas, pymes, organizaciones y actores del territorio con conocimiento aplicado, asesoramiento técnico, capacitación y soluciones que impulsan productividad, innovación y crecimiento.</p>
-          <div class="actions"><a class="btn primary" href="#contacto">Solicitar una reunión</a><a class="btn secondary" href="#servicios">Ver servicios</a></div>
+          <div class="actions"><a mat-flat-button color="accent" href="#contacto">Solicitar una reunión</a><a mat-stroked-button href="#servicios">Ver servicios</a></div>
           <utn-search-bar />
           <div class="hero-trust"><span>Asesoramiento técnico</span><span>Capacitación in company</span><span>Certificación</span><span>Transferencia tecnológica</span></div>
         </div>
@@ -50,7 +56,7 @@ import { SERVICES } from './vinculacion.component';
       <section class="content problems-section">
         <div class="section-heading"><p class="eyebrow">Problemas que resolvemos</p><h2>Podemos ayudarte si...</h2></div>
         <div class="problem-list">
-          <div class="problem-item" *ngFor="let problem of problems">{{ problem }}</div>
+          <mat-chip-set aria-label="Problemas que resolvemos"><mat-chip *ngFor="let problem of problems">{{ problem }}</mat-chip></mat-chip-set>
         </div>
       </section>
 
@@ -76,7 +82,7 @@ import { SERVICES } from './vinculacion.component';
         </div>
       </section>
 
-      <section id="servicios" class="content"><h2>Servicios y áreas de trabajo</h2><div class="service-grid"><a *ngFor="let service of services" [routerLink]="['/vinculacion', service.slug]" class="service-card"><img *ngIf="service.image" [src]="'/vinculacion/assets/' + service.image" [alt]="service.title"><h3>{{ service.title }}</h3><p>{{ service.text }}</p><span>Conocer servicio</span></a></div></section>
+      <section id="servicios" class="content"><h2>Servicios y áreas de trabajo</h2><div class="service-grid"><mat-card *ngFor="let service of services" class="service-card"><img *ngIf="service.image" mat-card-image [src]="'/vinculacion/assets/' + service.image" [alt]="service.title"><mat-card-content><h3>{{ service.title }}</h3><p>{{ service.text }}</p></mat-card-content><mat-card-actions><a mat-button color="primary" [routerLink]="['/vinculacion', service.slug]">Conocer servicio</a></mat-card-actions></mat-card></div></section>
 
       <section class="content"><div class="card"><h2>¿Cómo participar?</h2><p>Podés acercarte a la Secretaría para consultar oportunidades de capacitación, asesoramiento, certificaciones o articulación con proyectos tecnológicos y de innovación.</p><p>La propuesta está orientada a acompañar a empresas, instituciones, docentes, estudiantes y comunidad en general.</p></div></section>
 

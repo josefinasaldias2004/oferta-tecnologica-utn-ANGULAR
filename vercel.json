@@ -1,6 +1,6 @@
 {
   "framework": "angular",
-  "buildCommand": "corepack pnpm run build",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist/oferta-tecnologica",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

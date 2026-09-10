@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-interface SearchOption {
+export interface SearchOption {
   label: string;
   route: string;
   keywords: string[];
@@ -53,6 +53,7 @@ interface SearchOption {
   `
 })
 export class SearchBarComponent {
+  @Input() options: SearchOption[] = [];
   query = '';
   matches: SearchOption[] = [];
   showSuggestions = false;
@@ -80,7 +81,8 @@ export class SearchBarComponent {
     const normalized = this.normalize(term);
     if (!normalized) return [];
 
-    return this.searchOptions.filter((option) =>
+    const options = this.options.length ? this.options : this.searchOptions;
+    return options.filter((option) =>
       option.keywords.some((keyword) => {
         const normalizedKeyword = this.normalize(keyword);
         return normalizedKeyword.includes(normalized) || normalized.includes(normalizedKeyword);
@@ -92,7 +94,6 @@ export class SearchBarComponent {
     const match = this.getMatches(this.query)[0];
     if (match) {
       this.selectSuggestion(match);
-      this.router.navigateByUrl(match.route);
     }
   }
 
@@ -100,6 +101,7 @@ export class SearchBarComponent {
     this.query = option.label;
     this.matches = [];
     this.showSuggestions = false;
+    this.router.navigateByUrl(option.route);
   }
 }
 

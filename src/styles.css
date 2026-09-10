@@ -84,6 +84,26 @@ nav a.active,
 nav a:hover {
   border-color: var(--orange);
 }
+:root.dark-theme .topbar {
+  background: #07111f;
+  color: #f5f8fc;
+  border-bottom: 1px solid #263b50;
+}
+:root.dark-theme .brand img {
+  background: #14283d;
+}
+:root.dark-theme .theme-toggle {
+  border-color: #557089;
+  background: #14283d;
+  color: #ffffff;
+}
+:root.dark-theme nav a {
+  color: #f5f8fc;
+}
+:root.dark-theme nav a:hover,
+:root.dark-theme nav a:focus-visible {
+  color: #ffffff;
+}
 .menu-toggle {
   display: none;
   padding: 8px 12px;
@@ -116,7 +136,11 @@ nav a:hover {
 }
 .home-hero-slides::after {
   content: "";
-  background: linear-gradient(110deg, rgba(7, 20, 40, 0.9), rgba(7, 20, 40, 0.42));
+  background: linear-gradient(
+    110deg,
+    rgba(7, 20, 40, 0.9),
+    rgba(7, 20, 40, 0.42)
+  );
 }
 .home-hero-slides img {
   position: absolute;
@@ -126,7 +150,9 @@ nav a:hover {
   object-fit: cover;
   opacity: 0;
   transform: scale(1.04);
-  transition: opacity 900ms ease, transform 6s ease;
+  transition:
+    opacity 900ms ease,
+    transform 6s ease;
 }
 .home-hero-slides img.active {
   opacity: 1;
@@ -757,7 +783,7 @@ button {
 }
 .research-hero p:not(.eyebrow) {
   max-width: 900px;
-  color: #d7e6f4;
+  color: #fff;
   line-height: 1.75;
   font-size: 1.06rem;
 }

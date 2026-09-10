@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { HeaderComponent, SearchBarComponent } from './shared.component';
+import { HeaderComponent, SearchBarComponent, SearchOption } from './shared.component';
 import { SERVICES } from './vinculacion.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -24,7 +24,7 @@ import { MatRadioModule } from '@angular/material/radio';
           <h1>Innovación, formación y tecnología al servicio de tu negocio</h1>
           <p>La Secretaría de Vinculación e Innovación Tecnológica de la UTN FRSN conecta empresas, pymes, organizaciones y actores del territorio con conocimiento aplicado, asesoramiento técnico, capacitación y soluciones que impulsan productividad, innovación y crecimiento.</p>
           <div class="actions"><a mat-flat-button color="accent" href="#contacto">Solicitar una reunión</a><a mat-stroked-button href="#servicios">Ver servicios</a></div>
-          <utn-search-bar />
+          <utn-search-bar [options]="searchOptions" />
           <div class="hero-trust"><span>Asesoramiento técnico</span><span>Capacitación in company</span><span>Certificación</span><span>Transferencia tecnológica</span></div>
         </div>
       </section>
@@ -92,6 +92,11 @@ import { MatRadioModule } from '@angular/material/radio';
 })
 export class VinculacionHomeComponent {
   services = SERVICES;
+  searchOptions: SearchOption[] = SERVICES.map((service) => ({
+    label: service.title,
+    route: `/vinculacion/${service.slug}`,
+    keywords: [service.title, service.text, service.slug.replace(/-/g, ' ')]
+  }));
   mail = '';
   name = '';
   userType = '';

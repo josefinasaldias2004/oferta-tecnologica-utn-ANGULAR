@@ -561,12 +561,36 @@ button {
 :root.dark-theme .tile,
 :root.dark-theme .service-card,
 :root.dark-theme .cards article,
+:root.dark-theme .catalog-card,
+:root.dark-theme .department-card,
 :root.dark-theme .research-card,
 :root.dark-theme .research-filters input,
 :root.dark-theme .research-filters select,
 :root.dark-theme .empty-state {
   background: #14283d;
   color: var(--ink);
+}
+:root.dark-theme .catalog-card ul,
+:root.dark-theme .department-card ul {
+  color: var(--muted);
+}
+:root.dark-theme .stats-section .stat-card {
+  background: #000000;
+  color: #ffffff;
+}
+:root.dark-theme .stats-section .stat-card strong,
+:root.dark-theme .stats-section .stat-card span {
+  color: #ffffff;
+}
+:root.dark-theme .problems-section .mat-mdc-chip {
+  --mdc-chip-elevated-container-color: #203b56;
+  --mdc-chip-label-text-color: #ffffff;
+  --mdc-chip-outline-color: #557089;
+  background: #203b56;
+  color: #ffffff !important;
+}
+:root.dark-theme .problems-section .mat-mdc-chip .mdc-evolution-chip__text-label {
+  color: #ffffff !important;
 }
 :root.dark-theme input,
 :root.dark-theme textarea,
@@ -585,19 +609,25 @@ button {
   box-shadow: none;
 }
 :root.dark-theme .section-search .mat-mdc-text-field-wrapper {
-  background: #ffffff;
+  background: #14283d;
+}
+:root.dark-theme .section-search .mat-mdc-form-field-infix {
+  color: #ffffff;
 }
 :root.dark-theme .section-search .mat-mdc-form-field-infix,
 :root.dark-theme .section-search .mat-mdc-form-field-icon-prefix,
 :root.dark-theme .section-search .mat-mdc-form-field-icon-suffix,
 :root.dark-theme .section-search input,
 :root.dark-theme .section-search .mdc-floating-label {
-  color: #102a43 !important;
+  color: #ffffff !important;
+}
+:root.dark-theme .section-search input::placeholder {
+  color: #d7e6f4 !important;
 }
 :root.dark-theme .search-box .mdc-notched-outline__leading,
 :root.dark-theme .search-box .mdc-notched-outline__notch,
 :root.dark-theme .search-box .mdc-notched-outline__trailing {
-  border-color: #263b50 !important;
+  border-color: #b8c8d8 !important;
 }
 :root.dark-theme .search-box .mat-mdc-form-field-focus-overlay {
   background: transparent;
@@ -615,9 +645,19 @@ button {
 }
 :root.dark-theme .alt-band,
 :root.dark-theme .value-card,
-:root.dark-theme .highlight-card {
+:root.dark-theme .highlight-card,
+:root.dark-theme .impact-section {
   background: #14283d;
   color: var(--ink);
+}
+:root.dark-theme .impact-banner {
+  background: #14283d !important;
+  border: 1px solid #557089;
+  color: #ffffff;
+}
+:root.dark-theme .impact-banner h2,
+:root.dark-theme .impact-banner p:last-child {
+  color: #ffffff;
 }
 .service-grid {
   padding: 20px 0;

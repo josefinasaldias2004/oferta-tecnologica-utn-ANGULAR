@@ -23,7 +23,7 @@ export interface SearchOption {
     <div class="search-panel section-search">
       <div class="search-box" role="search">
         <mat-form-field appearance="outline" class="search-field">
-          <mat-label>Buscar en la oferta tecnológica</mat-label>
+          <mat-label>{{ searchLabel }}</mat-label>
           <input matInput
           type="search"
           [(ngModel)]="query"
@@ -31,7 +31,7 @@ export interface SearchOption {
           (focus)="onSearchInput()"
           (keyup.enter)="search()"
           [matAutocomplete]="searchAutocomplete"
-          aria-label="Buscar en las secciones de oferta tecnológica"
+          [attr.aria-label]="searchLabel"
           />
           <mat-icon matPrefix>search</mat-icon>
           <mat-autocomplete #searchAutocomplete="matAutocomplete" (optionSelected)="selectSuggestion($event.option.value)">
@@ -54,6 +54,7 @@ export interface SearchOption {
 })
 export class SearchBarComponent {
   @Input() options: SearchOption[] = [];
+  @Input() searchLabel = 'Buscar en la oferta tecnológica';
   query = '';
   matches: SearchOption[] = [];
   showSuggestions = false;

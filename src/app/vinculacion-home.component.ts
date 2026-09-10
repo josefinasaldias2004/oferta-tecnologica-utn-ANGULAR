@@ -24,7 +24,7 @@ import { MatRadioModule } from '@angular/material/radio';
           <h1>Innovación, formación y tecnología al servicio de tu negocio</h1>
           <p>La Secretaría de Vinculación e Innovación Tecnológica de la UTN FRSN conecta empresas, pymes, organizaciones y actores del territorio con conocimiento aplicado, asesoramiento técnico, capacitación y soluciones que impulsan productividad, innovación y crecimiento.</p>
           <div class="actions"><a mat-flat-button color="accent" href="#contacto">Solicitar una reunión</a><a mat-stroked-button href="#servicios">Ver servicios</a></div>
-          <utn-search-bar [options]="searchOptions" />
+          <utn-search-bar [options]="searchOptions" searchLabel="Buscar en la sección de Vinculación" />
           <div class="hero-trust"><span>Asesoramiento técnico</span><span>Capacitación in company</span><span>Certificación</span><span>Transferencia tecnológica</span></div>
         </div>
       </section>

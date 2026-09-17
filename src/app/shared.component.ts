@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 export interface SearchOption {
   label: string;
@@ -52,12 +53,14 @@ export interface SearchOption {
     </div>
   `
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnDestroy {
   @Input() options: SearchOption[] = [];
   @Input() searchLabel = 'Buscar en la oferta tecnológica';
   query = '';
   matches: SearchOption[] = [];
   showSuggestions = false;
+  private readonly queryChanges = new Subject<string>();
+  private readonly destroy$ = new Subject<void>();
 
   private readonly searchOptions: SearchOption[] = [
     { label: 'Oferta tecnológica', route: '/', keywords: ['oferta', 'portada', 'inicio', 'home'] },
@@ -67,15 +70,19 @@ export class SearchBarComponent {
     { label: 'Grupos de Investigación', route: '/investigacion', keywords: ['investigacion', 'investigación', 'grupos', 'proyectos', 'desarrollo', 'tecnologia', 'tecnología'] }
   ];
 
-  constructor(private readonly router: Router) {}
+  constructor(private readonly router: Router) {
+    this.queryChanges.pipe(debounceTime(180), distinctUntilChanged(), takeUntil(this.destroy$)).subscribe((query) => {
+      this.matches = this.getMatches(query);
+      this.showSuggestions = query.trim().length > 0 && this.matches.length > 0;
+    });
+  }
 
   private normalize(value: string): string {
     return value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
   onSearchInput(): void {
-    this.matches = this.getMatches(this.query);
-    this.showSuggestions = this.query.trim().length > 0 && this.matches.length > 0;
+    this.queryChanges.next(this.query);
   }
 
   private getMatches(term: string): SearchOption[] {
@@ -103,6 +110,12 @@ export class SearchBarComponent {
     this.matches = [];
     this.showSuggestions = false;
     this.router.navigateByUrl(option.route);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.queryChanges.complete();
   }
 }
 

@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -13,13 +13,13 @@ interface SearchOption {
 @Component({
   selector: 'utn-home',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf, RouterLink, HeaderComponent],
+  imports: [FormsModule, NgFor, NgIf, NgOptimizedImage, RouterLink, HeaderComponent],
   template: `
     <utn-header />
     <main class="page home">
       <section class="hero home-hero">
         <div class="home-hero-slides" aria-hidden="true">
-          <img *ngFor="let image of heroImages; let index = index" [class.active]="index === activeHeroSlide" [src]="image" alt="">
+          <img *ngFor="let image of heroImages; let index = index" [class.active]="index === activeHeroSlide" fill [ngSrc]="image" [priority]="index === 0" alt="">
         </div>
         <div class="home-hero-content">
           <p class="eyebrow">Universidad Tecnológica Nacional · FRSN</p>
@@ -61,19 +61,19 @@ interface SearchOption {
 
       <section class="tile-grid">
         <a routerLink="/vinculacion" class="tile">
-          <img src="/secretaria-extension-universitaria-main/assets/FONDO%20UTN.jpg" alt="Vinculación tecnológica">
+          <img src="/secretaria-extension-universitaria-main/assets/FONDO%20UTN.jpg" loading="lazy" alt="Vinculación tecnológica">
           <h2>Vinculación e Innovación Tecnológica</h2>
           <p>Asistencia, capacitación, certificación y transferencia para empresas e instituciones.</p>
           <span>Ver propuesta</span>
         </a>
         <a routerLink="/lea" class="tile">
-          <img src="/pagina-lea/assets/lea-fondo.jfif" alt="Laboratorio de estudios ambientales">
+          <img src="/pagina-lea/assets/lea-fondo.jfif" loading="lazy" alt="Laboratorio de estudios ambientales">
           <h2>LEA</h2>
           <p>Laboratorio de Estudios Ambientales, análisis y servicios especializados.</p>
           <span>Entrar al LEA</span>
         </a>
         <a routerLink="/secretaria" class="tile">
-          <img src="/secretaria-extension-universitaria-main/assets/cursos%20para%20empresas%20y%20comunidad.jpg" alt="Secretaría de Extensión">
+          <img src="/secretaria-extension-universitaria-main/assets/cursos%20para%20empresas%20y%20comunidad.jpg" loading="lazy" alt="Secretaría de Extensión">
           <h2>Secretaría de Extensión Universitaria</h2>
           <p>Capacitación, cultura y programas para la comunidad.</p>
           <span>Conocer la Secretaría</span>

@@ -261,12 +261,16 @@ nav a:hover {
 .section-search .mat-mdc-text-field-wrapper {
   background: #ffffff;
   border-radius: 16px;
-  transition: box-shadow 180ms ease, transform 180ms ease;
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
   --mdc-outlined-text-field-container-shape: 16px;
 }
 .section-search .mat-mdc-text-field-wrapper:hover,
 .section-search .mat-mdc-text-field-wrapper:focus-within {
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.16), 0 10px 24px rgba(19, 99, 223, 0.14);
+  box-shadow:
+    0 0 0 3px rgba(249, 115, 22, 0.16),
+    0 10px 24px rgba(19, 99, 223, 0.14);
   transform: translateY(-1px);
 }
 .section-search .mat-mdc-form-field-infix,
@@ -753,14 +757,19 @@ textarea {
   border-radius: 14px;
   outline: none;
   font: inherit;
-  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 input:not([type="radio"]):not([type="checkbox"]):hover,
 textarea:hover,
 input:not([type="radio"]):not([type="checkbox"]):focus,
 textarea:focus {
   border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(19, 99, 223, 0.14), 0 8px 18px rgba(19, 99, 223, 0.1);
+  box-shadow:
+    0 0 0 3px rgba(19, 99, 223, 0.14),
+    0 8px 18px rgba(19, 99, 223, 0.1);
   transform: translateY(-1px);
 }
 button {
@@ -1007,6 +1016,17 @@ button {
 .research-list {
   display: grid;
   gap: 28px;
+}
+.research-list-placeholder {
+  min-height: 420px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #e8eef5 25%, #f7f9fb 37%, #e8eef5 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+}
+@keyframes skeleton-loading {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
 }
 .research-card {
   display: grid;

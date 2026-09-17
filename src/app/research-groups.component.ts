@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderComponent, SearchBarComponent } from './shared.component';
 
 interface ResearchGroup {
@@ -108,34 +109,59 @@ const GROUPS: ResearchGroup[] = [
         <utn-search-bar />
       </section>
       <section class="research-content">
-        <div class="research-heading"><p class="eyebrow">Investigación aplicada</p><h2>Conocimiento que transforma la región</h2><p>{{ filteredGroups.length }} de {{ groups.length }} grupos, líneas de trabajo y servicios especializados desde la UTN Facultad Regional San Nicolás.</p><div class="research-filters"><label>Buscar grupos<input [(ngModel)]="searchTerm" type="search" placeholder="Nombre, área o responsable" /></label><label>Departamento<select [(ngModel)]="selectedDepartment"><option value="Todos">Todos los departamentos</option>@for (department of departments; track department) {<option [value]="department">{{ department }}</option>}</select></label></div></div>
+        <div class="research-heading"><p class="eyebrow">Investigación aplicada</p><h2>Conocimiento que transforma la región</h2><p>{{ filteredGroups().length }} de {{ groups.length }} grupos, líneas de trabajo y servicios especializados desde la UTN Facultad Regional San Nicolás.</p><div class="research-filters"><label>Buscar grupos<input [ngModel]="searchTerm()" (ngModelChange)="updateSearchTerm($event)" type="search" placeholder="Nombre, área o responsable" /></label><label>Departamento<select [ngModel]="selectedDepartment()" (ngModelChange)="updateDepartment($event)"><option value="Todos">Todos los departamentos</option>@for (department of departments(); track department) {<option [value]="department">{{ department }}</option>}</select></label></div></div>
+        @defer (on viewport) {
         <div class="research-list">
-          @for (group of filteredGroups; track group.name) {
+          @for (group of filteredGroups(); track group.name) {
             <article class="research-card">
               <div class="research-image" [class]="'image-' + group.image" role="img" [attr.aria-label]="'Imagen temática de ' + group.name"><span></span></div>
               <div class="research-card-body"><p class="department">{{ group.department }}</p><h3>{{ group.name }}<small *ngIf="group.acronym"> · {{ group.acronym }}</small></h3><div class="research-meta"><strong>Responsable:</strong> {{ group.responsible }}<a [href]="'mailto:' + group.email">{{ group.email }}</a></div><p>{{ group.description }}</p><a *ngIf="group.link" class="external-link" [href]="group.link" target="_blank" rel="noopener">Visitar sitio del grupo</a></div>
             </article>
           }
         </div>
-        @if (!filteredGroups.length) { <p class="empty-state">No encontramos grupos con esos criterios.</p> }
+        @if (!filteredGroups().length) { <p class="empty-state">No encontramos grupos con esos criterios.</p> }
+        } @placeholder { <div class="research-list-placeholder" aria-label="Cargando grupos de investigación"></div> }
       </section>
     </main>`
 })
 export class ResearchGroupsComponent {
   groups = GROUPS;
-  searchTerm = '';
-  selectedDepartment = 'Todos';
-
-  get departments(): string[] {
-    return [...new Set(this.groups.map((group) => group.department))];
-  }
-
-  get filteredGroups(): ResearchGroup[] {
-    const query = this.searchTerm.trim().toLocaleLowerCase();
+  searchTerm = signal('');
+  selectedDepartment = signal('Todos');
+  departments = computed(() => [...new Set(this.groups.map((group) => group.department))]);
+  filteredGroups = computed(() => {
+    const query = this.searchTerm().trim().toLocaleLowerCase();
     return this.groups.filter((group) => {
-      const matchesDepartment = this.selectedDepartment === 'Todos' || group.department === this.selectedDepartment;
+      const matchesDepartment = this.selectedDepartment() === 'Todos' || group.department === this.selectedDepartment();
       const searchableText = `${group.name} ${group.acronym ?? ''} ${group.responsible} ${group.description}`.toLocaleLowerCase();
       return matchesDepartment && (!query || searchableText.includes(query));
+    });
+  });
+
+  constructor(private readonly route: ActivatedRoute, private readonly router: Router) {
+    const params = this.route.snapshot.queryParamMap;
+    this.searchTerm.set(params.get('q') ?? '');
+    this.selectedDepartment.set(params.get('department') ?? 'Todos');
+  }
+
+  updateSearchTerm(value: string): void {
+    this.searchTerm.set(value);
+    this.updateQueryParams();
+  }
+
+  updateDepartment(value: string): void {
+    this.selectedDepartment.set(value);
+    this.updateQueryParams();
+  }
+
+  private updateQueryParams(): void {
+    this.router.navigate([], {
+      queryParams: {
+        q: this.searchTerm() || null,
+        department: this.selectedDepartment() === 'Todos' ? null : this.selectedDepartment()
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
     });
   }
 }

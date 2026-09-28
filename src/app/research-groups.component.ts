@@ -1,5 +1,5 @@
 import { Component, computed, signal } from '@angular/core';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderComponent, SearchBarComponent } from './shared.component';
@@ -400,7 +400,7 @@ const GROUPS: ResearchGroup[] = [
 @Component({
   selector: 'utn-research-groups',
   standalone: true,
-  imports: [HeaderComponent, SearchBarComponent, NgIf, NgFor, FormsModule],
+  imports: [HeaderComponent, SearchBarComponent, NgIf, FormsModule],
   template: `
     <utn-header />
     <main class="research-page">
@@ -501,24 +501,44 @@ const GROUPS: ResearchGroup[] = [
 
                   @if (group.services && group.services.length > 0) {
                     <div class="group-services-section">
-                      <h3>Servicios prioritarios para ofrecer</h3>
-                      <div class="services-table-wrapper">
-                        <table class="services-table">
-                          <thead>
-                            <tr>
-                              <th>Servicio</th>
-                              <th>Qué resuelve o entrega</th>
-                              <th>Empresas / Destinatarios</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let s of group.services">
-                              <td><strong>{{ s.name }}</strong></td>
-                              <td>{{ s.resolves }}</td>
-                              <td><span class="tag-target">{{ s.target }}</span></td>
-                            </tr>
-                          </tbody>
-                        </table>
+                      <div class="group-services-header">
+                        <div>
+                          <p class="eyebrow">Servicios prioritarios</p>
+                          <h3>Soluciones para organizaciones</h3>
+                        </div>
+                        <p class="group-services-intro">
+                          Servicios y capacidades que el grupo puede aplicar a necesidades concretas de empresas e instituciones.
+                        </p>
+                      </div>
+
+                      <div class="services-cards">
+                        @for (service of group.services; track service.name; let i = $index) {
+                          <article class="service-card">
+                            <div class="service-card-number">
+                              {{ (i + 1).toString().padStart(2, '0') }}
+                            </div>
+
+                            <div class="service-card-content">
+                              <h4>{{ service.name }}</h4>
+
+                              <div class="service-card-block">
+                                <span class="service-card-label">Qué resuelve</span>
+                                <p>{{ service.resolves }}</p>
+                              </div>
+
+                              <div class="service-card-target">
+                                <span class="service-card-label">Destinado a</span>
+                                <div class="service-target-list">
+                                  @for (target of service.target.split(','); track target) {
+                                    <span class="service-target-tag">
+                                      {{ target.trim() }}
+                                    </span>
+                                  }
+                                </div>
+                              </div>
+                            </div>
+                          </article>
+                        }
                       </div>
                     </div>
                   }
@@ -535,7 +555,213 @@ const GROUPS: ResearchGroup[] = [
         }
       </section>
     </main>
-  `
+  `,
+  styles: [`
+  .group-detail {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+    /* =========================================
+       DETALLE DEL GRUPO
+       ========================================= */
+
+    .group-services-section {
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      margin: 3rem 0 0 !important;
+      padding: 0 !important;
+      position: relative !important;
+      left: 0 !important;
+      right: auto !important;
+      box-sizing: border-box !important;
+    }
+
+    .group-services-header {
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 0 2rem !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    .group-services-header > div {
+      display: block !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .group-services-header h3 {
+      margin: 0 !important;
+    }
+
+    .group-services-intro {
+      display: block !important;
+      width: 100% !important;
+      max-width: 650px !important;
+      margin: .75rem 0 0 !important;
+      padding: 0 !important;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    /* =========================================
+       CARDS DE SERVICIOS
+       ========================================= */
+
+    .services-cards {
+      display: grid !important;
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 1.25rem !important;
+      box-sizing: border-box !important;
+      position: relative !important;
+      left: 0 !important;
+      right: auto !important;
+    }
+
+    .service-card {
+      display: flex !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      min-height: 260px;
+      margin: 0 !important;
+      padding: 1.5rem !important;
+      box-sizing: border-box !important;
+      position: relative !important;
+      left: 0 !important;
+      right: auto !important;
+      gap: 1.25rem;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary, #1d526f);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, .08);
+    }
+
+    .service-card-number {
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--primary, #1d526f);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 700;
+    }
+
+    .service-card-content {
+      flex: 1 1 auto;
+      width: auto !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .service-card-content h4 {
+      margin: 0 0 1rem !important;
+      color: #1e293b;
+      font-size: 1.05rem;
+      line-height: 1.35;
+    }
+
+    .service-card-block {
+      margin: 0 0 1.25rem !important;
+    }
+
+    .service-card-label {
+      display: block;
+      margin: 0 0 .4rem !important;
+      color: var(--primary, #1d526f);
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .service-card-block p {
+      margin: 0 !important;
+      color: #64748b;
+      line-height: 1.55;
+      overflow-wrap: break-word;
+    }
+
+    .service-card-target {
+      margin: 0 !important;
+      padding-top: 1rem;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .service-target-list {
+      display: flex !important;
+      flex-wrap: wrap;
+      width: 100% !important;
+      min-width: 0 !important;
+      gap: .5rem;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .service-target-tag {
+      display: inline-flex;
+      max-width: 100%;
+      padding: .35rem .65rem;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: .75rem;
+      line-height: 1.35;
+    }
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+
+    @media (max-width: 900px) {
+      .services-cards {
+        grid-template-columns: 1fr !important;
+      }
+
+      .group-services-intro {
+        max-width: 100% !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .group-services-section {
+        margin-top: 2.25rem !important;
+      }
+
+      .service-card {
+        min-height: 0;
+        padding: 1.25rem !important;
+        gap: 1rem;
+      }
+
+      .service-card-number {
+        flex-basis: 36px;
+        width: 36px;
+        height: 36px;
+      }
+    }
+  `]
+
 })
 export class ResearchGroupsComponent {
   groups = GROUPS;
@@ -601,3 +827,4 @@ export class ResearchGroupsComponent {
     });
   }
 }
+

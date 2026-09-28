@@ -42,7 +42,7 @@ import { MatRadioModule } from '@angular/material/radio';
       </section>
 
       <section class="content catalog-section">
-        <div class="section-heading"><p class="eyebrow">Oferta de soluciones</p><h2>Organizar la oferta como un catálogo de soluciones</h2><p>Hoy no queda claro qué servicios existen. La propuesta se presenta de forma clara y directa para que cualquier PyME comprenda rápidamente qué puede resolver.</p></div>
+        <div class="section-heading"><h2>Catalogo</h2>></div>
         <div class="catalog-grid">
           <article class="catalog-card" *ngFor="let catalog of serviceCatalog">
             <h3>{{ catalog.title }}</h3>
@@ -56,7 +56,10 @@ import { MatRadioModule } from '@angular/material/radio';
       <section class="content problems-section">
         <div class="section-heading"><p class="eyebrow">Problemas que resolvemos</p><h2>Podemos ayudarte si...</h2></div>
         <div class="problem-list">
-          <mat-chip-set aria-label="Problemas que resolvemos"><mat-chip *ngFor="let problem of problems">{{ problem }}</mat-chip></mat-chip-set>
+          <article class="problem-card" *ngFor="let problem of problems">
+            <span aria-hidden="true">+</span>
+            <p>{{ problem }}</p>
+          </article>
         </div>
       </section>
 
@@ -84,7 +87,7 @@ import { MatRadioModule } from '@angular/material/radio';
 
       <section id="servicios" class="content"><h2>Servicios y áreas de trabajo</h2><div class="service-grid"><mat-card *ngFor="let service of services" class="service-card"><img *ngIf="service.image" mat-card-image [src]="'/vinculacion/assets/' + service.image" [alt]="service.title"><mat-card-content><h3>{{ service.title }}</h3><p>{{ service.text }}</p></mat-card-content><mat-card-actions><a mat-button color="primary" [routerLink]="['/vinculacion', service.slug]">Conocer servicio</a></mat-card-actions></mat-card></div></section>
 
-      <section class="content"><div class="card"><h2>¿Cómo participar?</h2><p>Podés acercarte a la Secretaría para consultar oportunidades de capacitación, asesoramiento, certificaciones o articulación con proyectos tecnológicos y de innovación.</p><p>La propuesta está orientada a acompañar a empresas, instituciones, docentes, estudiantes y comunidad en general.</p></div></section>
+      <section class="content"><div class="card"><h2>¿Cómo contactarnos?</h2><p>Podés acercarte a la Secretaría para consultar oportunidades de capacitación, asesoramiento, certificaciones o articulación con proyectos tecnológicos y de innovación.</p><p>La propuesta está orientada a acompañar a empresas, instituciones, docentes, estudiantes y comunidad en general.</p></div></section>
 
       <section class="content" id="contacto"><div class="contact contact-layout"><div><h2>Contacto institucional</h2><p><strong>Secretaría de Vinculación e Innovación Tecnológica</strong></p><p><strong>Dirección:</strong> Colón 332, San Nicolás de los Arroyos, Buenos Aires, Argentina</p><p><strong>Email general:</strong> <a href="mailto:vinculacionfrsn@frsn.utn.edu.ar">vinculacionfrsn@frsn.utn.edu.ar</a></p><p><strong>Correo de capacitación:</strong> <a href="mailto:capacitacionUVT@frsn.utn.edu.ar">capacitacionUVT@frsn.utn.edu.ar</a></p><p><strong>Correo de certificaciones:</strong> <a href="mailto:certificacionesfrsn@frsn.utn.edu.ar">certificacionesfrsn@frsn.utn.edu.ar</a></p><p><strong>Correo de tanques:</strong> <a href="mailto:tanquesFRSN@frsn.utn.edu.ar">tanquesFRSN@frsn.utn.edu.ar</a></p></div><form (ngSubmit)="send()"><h3>Dejanos tu consulta</h3><label>Mail<input [(ngModel)]="mail" name="mail" type="email" placeholder="tuemail@ejemplo.com" required></label><label>Nombre<input [(ngModel)]="name" name="name" placeholder="Tu nombre" required></label><fieldset><legend>¿Sos?</legend><label *ngFor="let option of userTypes"><input [(ngModel)]="userType" name="userType" type="radio" [value]="option">{{ option }}</label></fieldset><fieldset><legend>¿Qué necesitás?</legend><label *ngFor="let option of needs"><input [(ngModel)]="need" name="need" type="radio" [value]="option">{{ option }}</label></fieldset><label>Mensaje<textarea [(ngModel)]="message" name="message" rows="5" placeholder="Escribí tu consulta..." required></textarea></label><button type="submit">Enviar consulta</button></form></div></section>
     </main>

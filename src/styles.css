@@ -419,6 +419,12 @@ nav a:hover {
 .highlight-card {
   background: linear-gradient(135deg, white, #fff7ed);
 }
+.highlight-title {
+  margin-top: 0;
+  color: var(--orange);
+  font-size: 2rem;
+  line-height: 1.2;
+}
 .alt-band {
   background: #e7f0ff;
 }
@@ -638,6 +644,10 @@ button {
 }
 :root.dark-theme .home-hero p:not(.eyebrow) {
   color: #f5f8fc;
+}
+.service-hero p:not(.eyebrow),
+:root.dark-theme .service-hero p:not(.eyebrow) {
+  color: #ffffff;
 }
 :root.dark-theme .tile,
 :root.dark-theme .service-card,
@@ -1143,7 +1153,10 @@ button {
   cursor: pointer;
   font: inherit;
   font-weight: 700;
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
 }
 .group-detail-button:hover,
 .group-close-button:hover,
@@ -1344,6 +1357,19 @@ button {
 .detail .cards article {
   min-height: 100%;
 }
+.detail .section-action {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+.detail .section-action:hover {
+  background: var(--orange);
+}
 .contact a {
   color: #ffd6b0;
   font-weight: 700;
@@ -1468,7 +1494,7 @@ button {
   font-size: 0.95rem;
 }
 
-.services-table th, 
+.services-table th,
 .services-table td {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid #f1f5f9;
@@ -1487,6 +1513,5 @@ button {
   color: #1d4ed8;
   font-size: 0.85rem;
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;}
-
-  
+  border-radius: 4px;
+}

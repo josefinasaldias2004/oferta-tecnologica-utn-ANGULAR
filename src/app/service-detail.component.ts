@@ -24,6 +24,7 @@ import { SERVICE_DETAILS, ServiceDetail, SERVICES } from './vinculacion.componen
 				<ul *ngIf="section.items?.length">
 					<li *ngFor="let item of section.items">{{ item }}</li>
 				</ul>
+				<a *ngIf="section.linkText && section.linkUrl" class="section-action" [href]="section.linkUrl" target="_blank" rel="noopener noreferrer">{{ section.linkText }}</a>
 			</article>
 		</div>
 	</section>

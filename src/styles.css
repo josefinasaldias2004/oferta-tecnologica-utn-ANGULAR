@@ -141,6 +141,10 @@ nav a:hover {
   max-width: 1180px;
   margin: auto;
 }
+.page p:not(.eyebrow) {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
 .hero {
   padding: 96px 6vw 82px;
   background: linear-gradient(135deg, #e7f0ff, #fff8f0);
@@ -213,6 +217,35 @@ nav a:hover {
   color: var(--muted);
   font-size: 1.15rem;
   line-height: 1.7;
+}
+.lea-page .hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+.lea-page .hero .actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid var(--blue);
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.lea-page .hero .actions .btn.primary {
+  background: var(--blue);
+  color: #ffffff;
+}
+.lea-page .hero .actions .btn.secondary {
+  background: transparent;
+  color: var(--blue);
+}
+.lea-page .hero .actions .btn:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
 }
 .home-hero .home-hero-content > p:not(.eyebrow) {
   color: #ffffff;
@@ -413,16 +446,34 @@ nav a:hover {
   grid-template-columns: 1.15fr 1fr;
   gap: 22px;
 }
+.b2b-grid {
+  grid-template-columns: 1fr;
+}
 .value-grid {
   grid-template-columns: repeat(3, 1fr);
 }
 .highlight-card {
-  background: linear-gradient(135deg, white, #fff7ed);
+  background: transparent;
+}
+.page .highlight-card p {
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+.benefits-card ul {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding-left: 24px;
+}
+.benefits-card li {
+  padding-left: 4px;
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
 .highlight-title {
   margin-top: 0;
-  color: var(--orange);
-  font-size: 2rem;
+  color: var(--ink);
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
   line-height: 1.2;
 }
 .alt-band {
@@ -498,12 +549,8 @@ nav a:hover {
   border-radius: 16px;
   background: #ffffff;
   box-shadow: 0 12px 26px rgba(16, 42, 67, 0.1);
-  border-left: 5px solid var(--blue);
+  border: 2px solid var(--orange);
   color: var(--ink);
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    border-color 180ms ease;
 }
 .problem-card > span {
   flex: 0 0 auto;
@@ -524,9 +571,9 @@ nav a:hover {
   line-height: 1.45;
 }
 .problem-card:hover {
-  transform: translateY(-3px);
+  transform: none;
   border-left-color: var(--orange);
-  box-shadow: 0 16px 30px rgba(16, 42, 67, 0.16);
+  box-shadow: 0 12px 26px rgba(16, 42, 67, 0.1);
 }
 .problem-item {
   background: #fff;
@@ -684,7 +731,6 @@ button {
 :root.dark-theme .problem-card {
   background: #14283d;
   color: #ffffff;
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
 }
 :root.dark-theme .problem-card > span {
   background: #203b56;
@@ -749,7 +795,6 @@ button {
 }
 :root.dark-theme .alt-band,
 :root.dark-theme .value-card,
-:root.dark-theme .highlight-card,
 :root.dark-theme .impact-section {
   background: #14283d;
   color: var(--ink);
@@ -951,7 +996,7 @@ button {
   }
   .hero p:not(.eyebrow),
   .research-hero p:not(.eyebrow) {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   .search-box {
     align-items: stretch;

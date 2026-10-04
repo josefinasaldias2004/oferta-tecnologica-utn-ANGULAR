@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -119,11 +119,9 @@ export class SearchBarComponent implements OnDestroy {
   }
 }
 
-@Component({ selector: 'utn-header', standalone: true, imports: [RouterLink, RouterLinkActive, MatButtonModule, MatIconModule, MatToolbarModule], template: `
-<mat-toolbar class="topbar"><a routerLink="/" class="brand"><img src="/pagina-lea/assets/logo-UTN.svg" alt="Logo UTN"><span>UTN FRSN</span></a><div class="header-actions"><button mat-icon-button class="menu-toggle" type="button" (click)="menuOpen = !menuOpen" [attr.aria-expanded]="menuOpen" aria-controls="main-navigation" [attr.aria-label]="menuOpen ? 'Cerrar navegación' : 'Abrir navegación'"><mat-icon>{{ menuOpen ? 'close' : 'menu' }}</mat-icon></button><button mat-icon-button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="isDark ? 'Activar modo claro' : 'Activar modo oscuro'"><mat-icon>{{ isDark ? 'dark_mode' : 'light_mode' }}</mat-icon></button></div>
-<nav id="main-navigation" [class.open]="menuOpen"><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuOpen = false">Portada</a><a routerLink="/lea" routerLinkActive="active" (click)="menuOpen = false">LEA</a><a routerLink="/secretaria" routerLinkActive="active" (click)="menuOpen = false">Secretaría</a><a routerLink="/vinculacion" routerLinkActive="active" (click)="menuOpen = false">Vinculación</a><a routerLink="/investigacion" routerLinkActive="active" (click)="menuOpen = false">Investigación</a></nav></mat-toolbar>` })
+@Component({ selector: 'utn-header', standalone: true, imports: [RouterLink, MatButtonModule, MatIconModule, MatToolbarModule], template: `
+<mat-toolbar class="topbar"><a routerLink="/" class="brand"><img src="/pagina-lea/assets/logo-UTN.svg" alt="Logo UTN"><span>UTN FRSN</span></a><div class="header-actions"><button mat-icon-button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="isDark ? 'Activar modo claro' : 'Activar modo oscuro'"><mat-icon>{{ isDark ? 'dark_mode' : 'light_mode' }}</mat-icon></button></div></mat-toolbar>` })
 export class HeaderComponent {
-  menuOpen = false;
   isDark = localStorage.getItem('utn-theme') === 'dark';
 
   constructor() {

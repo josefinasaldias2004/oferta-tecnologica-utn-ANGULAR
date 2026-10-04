@@ -20,16 +20,13 @@ import { MatRadioModule } from '@angular/material/radio';
     <main class="page vinc-page">
       <section class="hero service-hero">
         <div class="container hero-inner">
-          <p class="eyebrow">Soluciones para empresas, instituciones y organizaciones</p>
           <h1>Innovación, formación y tecnología al servicio de las organizaciones</h1>
           <p>La Secretaría de Vinculación e Innovación Tecnológica de la UTN FRSN conecta empresas, pymes, organizaciones y actores del territorio con conocimiento aplicado, asesoramiento técnico, capacitación y soluciones que impulsan productividad, innovación y crecimiento.</p>
-          <div class="actions"><a mat-flat-button color="accent" href="#contacto">Solicitar una reunión</a><a mat-stroked-button href="#servicios">Ver servicios</a></div>
           <utn-search-bar [options]="searchOptions" searchLabel="Buscar en la sección de Vinculación" />
-          <div class="hero-trust"><span>Asesoramiento técnico</span><span>Formación técnica</span><span>Certificación</span><span>Transferencia tecnológica</span></div>
         </div>
       </section>
 
-      <section class="content"><div class="b2b-grid"><article class="card highlight-card"><h2 class="highlight-title">¿Por qué trabajar con nosotros?</h2><p>Soluciones prácticas para desafíos reales del sector productivo. Desde la UTN acompañamos a organizaciones que buscan mejorar procesos, actualizar capacidades, innovar con respaldo académico y fortalecer su relación con la comunidad y el territorio.</p><p>Trabajamos de forma cercana, personalizada y orientada a resultados, combinando conocimiento técnico, formación aplicada y articulación estratégica con la universidad.</p></article><article class="card"><h2>Beneficios para empresas e instituciones</h2><ul><li>Acceso a expertos, docentes e investigadores con enfoque aplicado.</li><li>Capacitación a medida para equipos, supervisores y personal técnico.</li><li>Asesoramiento en proyectos, diagnósticos, procesos y mejora continua.</li><li>Certificaciones y servicios que fortalecen competencias y cumplimiento.</li><li>Conexión con la universidad, la innovación y el desarrollo regional.</li></ul></article></div></section>
+      <section class="content"><div class="b2b-grid"><article class="card highlight-card"><h2 class="highlight-title">¿Por qué trabajar con nosotros?</h2><p>Soluciones prácticas para desafíos reales del sector productivo. Desde la UTN acompañamos a organizaciones que buscan mejorar procesos, actualizar capacidades, innovar con respaldo académico y fortalecer su relación con la comunidad y el territorio.</p><p>Trabajamos de forma cercana, personalizada y orientada a resultados, combinando conocimiento técnico, formación aplicada y articulación estratégica con la universidad.</p></article><article class="card benefits-card"><h2>Beneficios para organizaciones e instituciones</h2><ul><li>Acceso a expertos, docentes e investigadores con enfoque aplicado.</li><li>Capacitación a medida para equipos, supervisores y personal técnico.</li><li>Asesoramiento en proyectos, diagnósticos, procesos y mejora continua.</li><li>Certificaciones y servicios que fortalecen competencias y cumplimiento.</li><li>Conexión con la universidad, la innovación y el desarrollo regional.</li></ul></article></div></section>
 
       <section class="content alt-band"><div class="section-heading"><h2>Herramientas para impulsar organizaciones, talento y competitividad</h2></div><div class="value-grid"><article class="value-card"><h3>Capacitación empresarial</h3><p>Programas y cursos diseñados para formar equipos, actualizar saberes y desarrollar competencias clave.</p></article><article class="value-card"><h3>Asesoramiento técnico</h3><p>Acompañamiento especializado para resolver desafíos técnicos, mejorar procesos y definir soluciones profesionales.</p></article><article class="value-card"><h3>Certificaciones y competencias</h3><p>Gestión de certificaciones y apoyos para validar y fortalecer capacidades técnicas y profesionales.</p></article></div></section>
 
@@ -37,7 +34,11 @@ import { MatRadioModule } from '@angular/material/radio';
         <div class="section-heading"><h2>Catalogo</h2>></div>
         <div class="catalog-grid">
           <article class="catalog-card" *ngFor="let catalog of serviceCatalog">
-            <h3>{{ catalog.title }}</h3>
+            <h3 *ngIf="catalog.title === 'Laboratorios y ensayos' || catalog.title === 'Investigación y desarrollo'; else catalogTitle">
+              <a *ngIf="catalog.title === 'Laboratorios y ensayos'; else researchGroupsLink" routerLink="/lea">{{ catalog.title }}</a>
+              <ng-template #researchGroupsLink><a routerLink="/investigacion">{{ catalog.title }}</a></ng-template>
+            </h3>
+            <ng-template #catalogTitle><h3>{{ catalog.title }}</h3></ng-template>
             <ul>
               <li *ngFor="let item of catalog.items">✔ {{ item }}</li>
             </ul>
@@ -45,7 +46,7 @@ import { MatRadioModule } from '@angular/material/radio';
         </div>
       </section>
 
-      <section id="servicios" class="content"><h2>Servicios y áreas de trabajo</h2><div class="service-grid"><mat-card *ngFor="let service of services" class="service-card"><img *ngIf="service.image" mat-card-image [src]="'/vinculacion/assets/' + service.image" [alt]="service.title"><mat-card-content><h3>{{ service.title }}</h3><p>{{ service.text }}</p></mat-card-content><mat-card-actions><a mat-button color="primary" [routerLink]="['/vinculacion', service.slug]">Conocer servicio</a></mat-card-actions></mat-card></div></section>
+      <section id="servicios" class="content"><h2>Servicios y áreas de trabajo</h2><div class="service-grid"><mat-card *ngFor="let service of services" class="service-card"><img *ngIf="service.image" mat-card-image [src]="'/vinculacion/assets/' + service.image" [alt]="service.title"><mat-card-content><h3>{{ service.title }}</h3><p>{{ service.text }}</p></mat-card-content><mat-card-actions><a mat-button color="primary" [routerLink]="service.slug === 'laboratorios-y-ensayos' ? '/lea' : service.slug === 'investigacion-y-desarrollo' ? '/investigacion' : ['/vinculacion', service.slug]">Conocer servicio</a></mat-card-actions></mat-card></div></section>
 
       <section class="content problems-section">
         <div class="section-heading"><p class="eyebrow">Problemas que resolvemos</p><h2>Podemos ayudarte si...</h2></div>
@@ -77,11 +78,10 @@ import { MatRadioModule } from '@angular/material/radio';
 })
 export class VinculacionHomeComponent {
   services = SERVICES
-    .filter((service) => service.slug !== 'financiamiento' && service.slug !== 'capacitacion-in-company')
-    .map((service) => service.slug === 'asistencia-tecnica' ? { ...service, image: 'asistencia-tecnica.jpg' } : service);
+    .filter((service) => service.slug !== 'financiamiento' && service.slug !== 'capacitacion-in-company');
   searchOptions: SearchOption[] = this.services.map((service) => ({
     label: service.title,
-    route: `/vinculacion/${service.slug}`,
+    route: service.slug === 'laboratorios-y-ensayos' ? '/lea' : service.slug === 'investigacion-y-desarrollo' ? '/investigacion' : `/vinculacion/${service.slug}`,
     keywords: [service.title, service.text, service.slug.replace(/-/g, ' ')]
   }));
   mail = '';

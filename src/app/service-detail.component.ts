@@ -7,7 +7,8 @@ import { SERVICE_DETAILS, ServiceDetail, SERVICES } from './vinculacion.componen
 @Component({ selector: 'utn-service-detail', standalone: true, imports: [NgFor, NgIf, RouterLink, HeaderComponent], template: `
 <utn-header />
 <main class="page" *ngIf="service as currentService">
-	<section class="hero compact">
+	<section class="hero compact" [class.service-image-hero]="!!currentService.image">
+		<img *ngIf="currentService.image" class="service-hero-background" [src]="'/vinculacion/assets/' + currentService.image" alt="" aria-hidden="true">
 		<div class="container">
 			<p class="eyebrow">Secretaría de Vinculación e Innovación Tecnológica</p>
 			<h1>{{ currentService.title }}</h1>
@@ -16,15 +17,16 @@ import { SERVICE_DETAILS, ServiceDetail, SERVICES } from './vinculacion.componen
 		</div>
 	</section>
 	<section class="content detail">
-		<img *ngIf="currentService.image" [src]="'/vinculacion/assets/' + currentService.image" [alt]="currentService.title">
-		<div class="cards">
-			<article *ngFor="let section of currentService.sections" [id]="section.id">
+		<div class="cards" [class.citi-detail-cards]="currentService.slug === 'citi'">
+			<article *ngFor="let section of currentService.sections" [id]="section.id" [class.citi-capabilities-section]="currentService.slug === 'citi' && section.title === 'Capacidades'">
 				<h2>{{ section.title }}</h2>
-				<p *ngFor="let paragraph of section.paragraphs">{{ paragraph }}</p>
-				<ul *ngIf="section.items?.length">
-					<li *ngFor="let item of section.items">{{ item }}</li>
-				</ul>
-				<a *ngIf="section.linkText && section.linkUrl" class="section-action" [href]="section.linkUrl" target="_blank" rel="noopener noreferrer">{{ section.linkText }}</a>
+				<div class="detail-section-content">
+					<p *ngFor="let paragraph of section.paragraphs">{{ paragraph }}</p>
+					<div *ngIf="section.items?.length" class="detail-item-grid">
+						<article class="detail-item-card" *ngFor="let item of section.items">{{ item }}</article>
+					</div>
+					<a *ngIf="section.linkText && section.linkUrl" class="section-action" [href]="section.linkUrl" target="_blank" rel="noopener noreferrer">{{ section.linkText }}</a>
+				</div>
 			</article>
 		</div>
 	</section>

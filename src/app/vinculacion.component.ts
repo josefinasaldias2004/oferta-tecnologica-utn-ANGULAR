@@ -41,6 +41,8 @@ export class VinculacionComponent {
 	}
 }
 
+SERVICES.push({ slug: 'transicion-energetica-municipal', title: 'Transición energética municipal y comunal', text: 'Asistencia técnica para municipios y comunas: diagnóstico energético, capacitación, energías renovables y uso responsable de la energía.', image: '' });
+
 const defaultSections: ServiceSection[] = [{ title: 'Una solución con respaldo universitario', paragraphs: ['Trabajamos junto a empresas, instituciones y organizaciones para comprender cada desafío y brindar una respuesta técnica, profesional y orientada a resultados.'] }];
 
 export const SERVICE_DETAILS: Record<string, ServiceDetail> = Object.fromEntries(SERVICES.map((service) => [service.slug, { ...service, email: 'vinculacionfrsn@frsn.utn.edu.ar', sections: defaultSections }])) as Record<string, ServiceDetail>;

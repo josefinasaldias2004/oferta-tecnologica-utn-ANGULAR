@@ -31,9 +31,9 @@ interface SearchOption {
             <input
               type="search"
               [(ngModel)]="query"
-              (input)="onSearchInput()"
+              (input)="onSearchInput($event)"
               (keyup.enter)="search()"
-              (focus)="onSearchInput()"
+              (focus)="onSearchInput($event)"
               placeholder="Buscar: vinculación, LEA, extensión, investigación..."
               aria-label="Buscar en oferta tecnológica"
             />
@@ -41,6 +41,7 @@ interface SearchOption {
           </div>
 
           <div *ngIf="showSuggestions && matches.length" class="search-results" aria-live="polite">
+            <p class="search-results-summary">{{ matches.length === 1 ? 'Un resultado' : matches.length + ' resultados' }}. Elegí una opción para continuar.</p>
             <button
               *ngFor="let option of matches"
               type="button"
@@ -48,8 +49,11 @@ interface SearchOption {
               (click)="selectSuggestion(option)"
             >
               <span>{{ option.label }}</span>
-              <small>{{ option.route }}</small>
             </button>
+          </div>
+
+          <div *ngIf="query.trim() && !matches.length" class="search-empty" aria-live="polite">
+            <p><strong>Sin resultados.</strong> Probá con otro término o <a routerLink="/vinculacion" fragment="contacto">consultanos directamente</a>.</p>
           </div>
 
           <div class="search-hints">
@@ -84,6 +88,18 @@ interface SearchOption {
           <p>Investigación, desarrollo e innovación aplicada desde la UTN FRSN.</p>
           <span>Conocer los grupos</span>
         </a>
+      </section>
+
+      <section class="content home-needs" aria-labelledby="home-needs-title">
+        <p class="eyebrow">Accesos por necesidad</p>
+        <h2 id="home-needs-title">¿Qué necesitás resolver?</h2>
+        <div class="home-need-grid">
+          <a routerLink="/vinculacion" fragment="necesidad-operaciones">Mejorar procesos y resolver desafíos técnicos</a>
+          <a routerLink="/vinculacion" fragment="necesidad-capacitacion">Capacitar o certificar equipos</a>
+          <a routerLink="/vinculacion" fragment="necesidad-desarrollo">Desarrollar o evaluar soluciones</a>
+          <a routerLink="/vinculacion" fragment="necesidad-financiamiento">Consultar alternativas de financiamiento</a>
+          <a routerLink="/vinculacion" fragment="necesidad-transicion-energetica">Planificar la transición energética municipal</a>
+        </div>
       </section>
     </main>
   `
@@ -137,9 +153,11 @@ export class HomeComponent implements OnDestroy {
     return value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
-  onSearchInput(): void {
-    this.matches = this.getMatches(this.query);
-    this.showSuggestions = this.query.trim().length > 0 && this.matches.length > 0;
+  onSearchInput(event?: Event): void {
+    const query = event?.target instanceof HTMLInputElement ? event.target.value : this.query;
+    this.query = query;
+    this.matches = this.getMatches(query);
+    this.showSuggestions = query.trim().length > 0 && this.matches.length > 0;
   }
 
   private getMatches(term: string): SearchOption[] {
@@ -158,12 +176,11 @@ export class HomeComponent implements OnDestroy {
   }
 
   search(): void {
-    const match = this.getMatches(this.query)[0];
+    this.matches = this.getMatches(this.query);
+    this.showSuggestions = this.query.trim().length > 0;
 
-    if (match) {
-      this.selectSuggestion(match);
-      this.router.navigateByUrl(match.route);
-      return;
+    if (this.matches.length === 1) {
+      this.selectSuggestion(this.matches[0]);
     }
   }
 
@@ -176,6 +193,7 @@ export class HomeComponent implements OnDestroy {
     this.query = option.label;
     this.matches = [];
     this.showSuggestions = false;
+    this.router.navigateByUrl(option.route);
   }
 
   ngOnDestroy(): void {

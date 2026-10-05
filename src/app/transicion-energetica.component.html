@@ -1,0 +1,68 @@
+<utn-header />
+
+<main class="page energy-page">
+  <section class="hero energy-hero" aria-labelledby="energy-title">
+    <div class="container">
+      <a class="energy-back" routerLink="/vinculacion">← Volver a Vinculación</a>
+      <p class="eyebrow">UTN San Nicolás · Municipios y comunas</p>
+      <h1 id="energy-title">Asistencia técnica para la <span>transición energética</span> municipal y comunal</h1>
+      <p class="energy-intro">Desde la Universidad Tecnológica Nacional San Nicolás acercamos a los municipios y comunas una propuesta integral para optimizar el uso de la energía, reducir costos y fortalecer capacidades técnicas locales, impulsando una gestión eficiente y sostenible.</p>
+      <div class="energy-actions">
+        <a class="energy-button energy-button-primary" href="#contacto-energia">Consultar por esta propuesta</a>
+        <a class="energy-button energy-button-secondary" href="#areas-energia">Conocer las áreas de trabajo</a>
+      </div>
+      <p class="energy-photo-credit"><a href="https://commons.wikimedia.org/wiki/File:Wind_Turbines_%5E_Solar_Panels_at_Upper_Holton_Wind_%5E_Solar_Farm_-_geograph.org.uk_-_4618332.jpg" target="_blank" rel="noopener noreferrer">Fotografía: Geographer / Geograph Britain and Ireland · CC BY-SA 2.0</a></p>
+    </div>
+  </section>
+
+  <section class="content energy-objective" aria-labelledby="objective-title">
+    <div class="energy-objective-inner">
+      <div><p class="eyebrow">Nuestro objetivo</p><h2 id="objective-title">Herramientas para decidir y avanzar</h2></div>
+      <p>Brindar herramientas técnicas y conocimientos para que cada municipio o comuna pueda tomar decisiones informadas y avanzar hacia un modelo energético más eficiente, sustentable y económico.</p>
+    </div>
+  </section>
+
+  <section class="content energy-work" id="areas-energia" aria-labelledby="areas-title">
+    <div class="energy-section-heading"><p class="eyebrow">Propuesta integral</p><h2 id="areas-title">Cuatro áreas de trabajo</h2></div>
+    <div class="energy-layout">
+      <div class="energy-areas">
+        <article class="energy-area" *ngFor="let area of areas; let index = index" [attr.aria-labelledby]="'energy-area-' + index">
+          <div class="energy-area-heading">
+            <span class="energy-number" aria-hidden="true">0{{ index + 1 }}</span>
+            <div><h3 [id]="'energy-area-' + index">{{ area.title }}</h3><p class="energy-subtitle" *ngIf="area.subtitle">{{ area.subtitle }}</p></div>
+          </div>
+          <p class="energy-description" *ngIf="area.description">{{ area.description }}</p>
+          <ul class="energy-checklist"><li *ngFor="let item of area.items">{{ item }}</li></ul>
+          <div class="energy-sectors" *ngIf="area.sectors">
+            <h4>Sectores de consumo</h4>
+            <ul><li *ngFor="let sector of area.sectors">{{ sector }}</li></ul>
+          </div>
+        </article>
+      </div>
+
+      <aside class="energy-sidebar" aria-label="Impacto esperado y respaldo institucional">
+        <section class="energy-impact" aria-labelledby="impact-title">
+          <p class="eyebrow">Impacto esperado</p><h2 id="impact-title">Una gestión más eficiente</h2>
+          <ul class="energy-checklist"><li *ngFor="let impact of impacts">{{ impact }}</li></ul>
+        </section>
+        <section class="energy-reasons" aria-labelledby="reasons-title">
+          <h2 id="reasons-title">¿Por qué elegir a la UTN San Nicolás?</h2>
+          <ul class="energy-checklist"><li *ngFor="let reason of reasons">{{ reason }}</li></ul>
+        </section>
+      </aside>
+    </div>
+  </section>
+
+  <section class="content energy-closing" aria-labelledby="closing-title">
+    <p class="eyebrow">Transición energética local</p>
+    <h2 id="closing-title">Desarrollo sostenible y futuro para todos</h2>
+    <p>Una gestión energética eficiente es el primer paso hacia municipios más sustentables, competitivos y preparados para los desafíos del futuro.</p>
+  </section>
+
+  <section class="content energy-contact-section" id="contacto-energia" aria-labelledby="contact-title">
+    <div class="energy-contact">
+      <div><p class="eyebrow">Contacto institucional</p><h2 id="contact-title">Consultá por esta propuesta</h2><p>Secretaría de Vinculación e Innovación Tecnológica</p><p>Colón 332, San Nicolás de los Arroyos, Buenos Aires, Argentina</p></div>
+      <div class="energy-contact-action"><a class="energy-button energy-button-primary" [href]="contactHref">Abrir correo para consultar</a><a class="energy-email" [href]="contactHref">{{ contactEmail }}</a><p>Se abrirá tu aplicación de correo para que escribas y envíes la consulta.</p></div>
+    </div>
+  </section>
+</main>

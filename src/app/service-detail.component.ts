@@ -13,12 +13,12 @@ import { SERVICE_DETAILS, ServiceDetail, SERVICES } from './vinculacion.componen
 			<p class="eyebrow">Secretaría de Vinculación e Innovación Tecnológica</p>
 			<h1>{{ currentService.title }}</h1>
 			<p>{{ currentService.text }}</p>
-			<a class="breadcrumb" routerLink="/vinculacion">← Volver a servicios</a>
+			<div class="detail-actions"><a class="breadcrumb" routerLink="/vinculacion">← Volver a servicios</a><a class="detail-contact-link" routerLink="/vinculacion" [queryParams]="{ servicio: currentService.title }" fragment="contacto">Consultar por este servicio</a></div>
 		</div>
 	</section>
 	<section class="content detail">
-		<div class="cards" [class.citi-detail-cards]="currentService.slug === 'citi'">
-			<article *ngFor="let section of currentService.sections" [id]="section.id" [class.citi-capabilities-section]="currentService.slug === 'citi' && section.title === 'Capacidades'">
+		<div class="cards" [class.citi-detail-cards]="currentService.slug === 'citi'" [class.certification-detail-cards]="currentService.slug === 'certificacion-de-oficios'">
+			<article *ngFor="let section of currentService.sections" [id]="section.id" [class.citi-capabilities-section]="currentService.slug === 'citi' && section.title === 'Capacidades'" [class.standalone-item-section]="!!section.items?.length">
 				<h2>{{ section.title }}</h2>
 				<div class="detail-section-content">
 					<p *ngFor="let paragraph of section.paragraphs">{{ paragraph }}</p>

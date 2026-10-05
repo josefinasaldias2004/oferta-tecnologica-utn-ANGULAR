@@ -1,0 +1,371 @@
+:host {
+  display: block;
+  --energy-surface: #fff;
+  --energy-soft: #e7f0ff;
+  --energy-border: #d7e2ed;
+}
+:host-context(.dark-theme) {
+  --energy-surface: #14283d;
+  --energy-soft: #102a43;
+  --energy-border: #36536e;
+}
+.energy-page {
+  overflow-wrap: anywhere;
+}
+.energy-page section[id] {
+  scroll-margin-top: 90px;
+}
+.energy-page .eyebrow {
+  color: #a84200;
+}
+:host-context(.dark-theme) .energy-page .eyebrow {
+  color: #ffb77d;
+}
+.energy-hero {
+  --energy-overlay: linear-gradient(
+    90deg,
+    rgba(7, 20, 40, 0.94) 0%,
+    rgba(7, 20, 40, 0.76) 52%,
+    rgba(7, 20, 40, 0.26) 100%
+  );
+  --energy-photo: url("https://upload.wikimedia.org/wikipedia/commons/3/3d/Wind_Turbines_%5E_Solar_Panels_at_Upper_Holton_Wind_%5E_Solar_Farm_-_geograph.org.uk_-_4618332.jpg");
+  --energy-photo-position: center 54%;
+  background-color: #071428;
+  background-image: var(--energy-overlay), var(--energy-photo);
+  background-size: cover, cover;
+  background-position:
+    center,
+    center 54%;
+  background-repeat: no-repeat, no-repeat;
+  color: #fff;
+  padding-top: 42px;
+  padding-bottom: 60px;
+}
+:host-context(.dark-theme) .energy-page .energy-hero {
+  background-color: #071428;
+  background-image: var(--energy-overlay), var(--energy-photo);
+  background-size: cover, cover;
+  background-position: center, var(--energy-photo-position);
+  background-repeat: no-repeat, no-repeat;
+}
+.energy-back {
+  display: inline-block;
+  margin-bottom: 30px;
+}
+.energy-hero .eyebrow,
+.energy-contact .eyebrow {
+  color: #ffb77d;
+}
+.energy-hero h1 {
+  line-height: 1.12;
+  max-width: 930px;
+  margin: 16px 0 24px;
+}
+.energy-hero h1 span {
+  color: #a9d8ff;
+}
+.energy-page .energy-hero .energy-intro {
+  color: #e6eff8;
+  max-width: 850px;
+}
+.energy-photo-credit {
+  margin: 16px 0 0;
+  color: #e6eff8;
+  font-size: 0.75rem !important;
+}
+.energy-photo-credit a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+.energy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.energy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1.4;
+}
+.energy-button-primary {
+  background: var(--orange, #f97316);
+  color: #102a43;
+}
+.energy-button-primary:hover {
+  background: #ffb77d;
+}
+.energy-button-secondary {
+  border-color: #9cb5cf;
+  color: #fff;
+  background: transparent;
+}
+.energy-button-secondary:hover {
+  background: #ffffff18;
+}
+a:focus-visible {
+  outline: 3px solid #ffb77d;
+  outline-offset: 5px;
+}
+.energy-objective {
+  padding-top: 42px;
+  padding-bottom: 42px;
+}
+.energy-objective-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 30px;
+  border-left: 4px solid var(--orange);
+  padding-left: 24px;
+  align-items: start;
+}
+.energy-objective h2 {
+  margin: 0;
+  font-size: 1.7rem;
+}
+.energy-objective .eyebrow {
+  margin-top: 0;
+}
+.energy-objective-inner > p {
+  margin: 0;
+  color: var(--muted);
+}
+.energy-work {
+  padding-top: 16px;
+  padding-bottom: 48px;
+}
+.energy-section-heading {
+  margin-bottom: 28px;
+}
+.energy-section-heading h2 {
+  margin: 8px 0;
+}
+.energy-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.energy-areas,
+.energy-sidebar {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+.energy-area {
+  background: var(--energy-surface);
+  border: 1px solid var(--energy-border);
+  border-radius: 16px;
+  padding: 26px;
+}
+.energy-area-heading {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.energy-number {
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--energy-soft);
+  color: var(--blue);
+  font-weight: 700;
+}
+.energy-area h3 {
+  margin: 3px 0 0;
+  font-size: 1.3rem;
+  line-height: 1.35;
+}
+.energy-page .energy-subtitle {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.energy-page .energy-description {
+  font-size: 1rem;
+  color: var(--muted);
+}
+.energy-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 22px 0 0;
+  display: grid;
+  gap: 14px;
+}
+.energy-checklist li {
+  position: relative;
+  padding-left: 24px;
+  line-height: 1.65;
+}
+.energy-checklist li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 9px;
+  width: 7px;
+  height: 11px;
+  border-right: 2px solid var(--blue);
+  border-bottom: 2px solid var(--blue);
+  transform: rotate(45deg);
+}
+.energy-sectors {
+  border-top: 1px solid var(--energy-border);
+  margin-top: 24px;
+  padding-top: 20px;
+}
+.energy-sectors h4 {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+}
+.energy-sectors ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.energy-sectors li {
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: var(--energy-soft);
+  color: var(--ink);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.energy-impact,
+.energy-reasons {
+  padding: 26px;
+  border-radius: 16px;
+}
+.energy-impact {
+  background: var(--energy-soft);
+}
+.energy-sidebar h2 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin: 0;
+}
+.energy-impact .eyebrow {
+  margin-top: 0;
+}
+.energy-reasons {
+  background: #102a43;
+  color: #fff;
+}
+.energy-reasons .energy-checklist li::before {
+  border-color: #ffb77d;
+}
+.energy-page .energy-closing {
+  background: var(--energy-soft);
+  padding-top: 44px;
+  padding-bottom: 44px;
+}
+.energy-closing h2 {
+  max-width: 780px;
+  margin: 12px 0;
+}
+.energy-closing > p:last-child {
+  max-width: 800px;
+  color: var(--muted);
+}
+.energy-contact-section {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+.energy-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 30px;
+  padding: 32px;
+  background: #102a43;
+  color: #fff;
+  border-radius: 16px;
+}
+.energy-contact h2 {
+  font-size: 1.7rem;
+  margin: 12px 0;
+}
+.energy-page .energy-contact p {
+  font-size: 1rem;
+}
+.energy-contact-action {
+  align-self: center;
+  min-width: 0;
+}
+.energy-email {
+  display: block;
+  margin-top: 20px;
+  color: #ffd6b0;
+  text-underline-offset: 4px;
+}
+.energy-page .energy-contact-action p {
+  font-size: 0.9rem;
+  color: #d6e5f3;
+}
+@media (max-width: 900px) {
+  .energy-layout {
+    grid-template-columns: 1fr;
+  }
+  .energy-sidebar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .energy-objective-inner,
+  .energy-sidebar,
+  .energy-contact {
+    grid-template-columns: 1fr;
+  }
+  .energy-objective-inner {
+    gap: 16px;
+    padding-left: 18px;
+  }
+  .energy-hero {
+    padding-top: 28px;
+    padding-bottom: 40px;
+    --energy-overlay: linear-gradient(
+        180deg,
+        rgba(7, 20, 40, 0.92) 0%,
+        rgba(7, 20, 40, 0.76) 74%,
+        rgba(7, 20, 40, 0.58) 100%
+      );
+    --energy-photo-position: 61% center;
+    background-position: center, var(--energy-photo-position);
+  }
+  .energy-hero h1 {
+    font-size: clamp(2rem, 7vw, 2.6rem);
+  }
+  .energy-back {
+    margin-bottom: 20px;
+  }
+  .energy-actions {
+    flex-direction: column;
+  }
+  .energy-area,
+  .energy-impact,
+  .energy-reasons,
+  .energy-contact {
+    padding: 22px;
+  }
+  .energy-area-heading {
+    gap: 12px;
+  }
+  .energy-area h3 {
+    font-size: 1.2rem;
+  }
+  .energy-page section[id] {
+    scroll-margin-top: 20px;
+  }
+}

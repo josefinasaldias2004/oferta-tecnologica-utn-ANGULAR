@@ -2,7 +2,6 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,36 +18,32 @@ export interface SearchOption {
 @Component({
   selector: 'utn-search-bar',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf, MatAutocompleteModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule],
+  imports: [FormsModule, NgFor, NgIf, RouterLink, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule],
   template: `
     <div class="search-panel section-search">
-      <div class="search-box" role="search">
+      <form class="search-box" role="search" (ngSubmit)="search()">
         <mat-form-field appearance="outline" class="search-field">
           <mat-label>{{ searchLabel }}</mat-label>
           <input matInput
           type="search"
           [(ngModel)]="query"
-          (input)="onSearchInput()"
-          (focus)="onSearchInput()"
-          (keyup.enter)="search()"
-          [matAutocomplete]="searchAutocomplete"
+          name="query"
+          (input)="onSearchInput($event)"
           [attr.aria-label]="searchLabel"
           />
           <mat-icon matPrefix>search</mat-icon>
-          <mat-autocomplete #searchAutocomplete="matAutocomplete" (optionSelected)="selectSuggestion($event.option.value)">
-            <mat-option *ngFor="let option of matches" [value]="option">
-              {{ option.label }} <small>{{ option.route }}</small>
-            </mat-option>
-          </mat-autocomplete>
         </mat-form-field>
-        <button mat-flat-button color="accent" type="button" (click)="search()">Buscar</button>
-      </div>
+        <button mat-flat-button color="accent" type="submit">Buscar</button>
+      </form>
 
-      <div *ngIf="showSuggestions && matches.length" class="search-results" aria-live="polite">
+      <div *ngIf="query.trim() && matches.length" class="search-results" aria-live="polite">
+        <p class="search-results-summary">{{ matches.length === 1 ? 'Un resultado' : matches.length + ' resultados' }}. Elegí una opción para continuar.</p>
         <button *ngFor="let option of matches" type="button" class="search-result-item" (click)="selectSuggestion(option)">
           <span>{{ option.label }}</span>
-          <small>{{ option.route }}</small>
         </button>
+      </div>
+      <div *ngIf="query.trim() && !matches.length" class="search-empty" aria-live="polite">
+        <p><strong>Sin resultados.</strong> Probá con otro término o <a routerLink="/vinculacion" fragment="contacto">consultanos directamente</a>.</p>
       </div>
     </div>
   `
@@ -58,7 +53,6 @@ export class SearchBarComponent implements OnDestroy {
   @Input() searchLabel = 'Buscar en la oferta tecnológica';
   query = '';
   matches: SearchOption[] = [];
-  showSuggestions = false;
   private readonly queryChanges = new Subject<string>();
   private readonly destroy$ = new Subject<void>();
 
@@ -73,7 +67,6 @@ export class SearchBarComponent implements OnDestroy {
   constructor(private readonly router: Router) {
     this.queryChanges.pipe(debounceTime(180), distinctUntilChanged(), takeUntil(this.destroy$)).subscribe((query) => {
       this.matches = this.getMatches(query);
-      this.showSuggestions = query.trim().length > 0 && this.matches.length > 0;
     });
   }
 
@@ -81,8 +74,10 @@ export class SearchBarComponent implements OnDestroy {
     return value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
-  onSearchInput(): void {
-    this.queryChanges.next(this.query);
+  onSearchInput(event?: Event): void {
+    const query = event?.target instanceof HTMLInputElement ? event.target.value : this.query;
+    this.query = query;
+    this.queryChanges.next(query);
   }
 
   private getMatches(term: string): SearchOption[] {
@@ -99,16 +94,15 @@ export class SearchBarComponent implements OnDestroy {
   }
 
   search(): void {
-    const match = this.getMatches(this.query)[0];
-    if (match) {
-      this.selectSuggestion(match);
+    this.matches = this.getMatches(this.query);
+    if (this.matches.length === 1) {
+      this.selectSuggestion(this.matches[0]);
     }
   }
 
   selectSuggestion(option: SearchOption): void {
     this.query = option.label;
     this.matches = [];
-    this.showSuggestions = false;
     this.router.navigateByUrl(option.route);
   }
 
@@ -133,9 +127,10 @@ export class HeaderComponent {
     document.documentElement.classList.toggle('dark-theme', this.isDark);
     localStorage.setItem('utn-theme', this.isDark ? 'dark' : 'light');
   }
+
 }
 
-@Component({ selector: 'utn-footer', standalone: true, imports: [RouterLink], template: `<footer class="footer"><div class="footer-info"><strong>UTN Facultad Regional San Nicolás</strong><span>Colón 332, San Nicolás de los Arroyos</span><span>(03461) 421000</span></div><div class="footer-links"><a routerLink="/">Portada</a><a routerLink="/vinculacion">Servicios</a><a routerLink="/investigacion">Investigación</a><a href="mailto:vinculacionfrsn@frsn.utn.edu.ar">Contacto</a></div></footer>` })
+@Component({ selector: 'utn-footer', standalone: true, imports: [RouterLink], template: `<footer class="footer"><div class="footer-info"><strong>UTN Facultad Regional San Nicolás</strong><span>Colón 332, San Nicolás de los Arroyos</span><span>(03461) 421000</span></div><div class="footer-links"><a routerLink="/">Portada</a><a routerLink="/vinculacion">Servicios</a><a routerLink="/investigacion">Investigación</a><a routerLink="/vinculacion" fragment="contacto">Contacto</a></div></footer>` })
 export class FooterComponent {}
 
 @Component({ selector: 'utn-contact', standalone: true, imports: [MatButtonModule, MatFormFieldModule, MatInputModule], template: `

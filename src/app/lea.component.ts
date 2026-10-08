@@ -22,7 +22,6 @@ interface LeaService {
           <p class="eyebrow">UTN FRSN</p>
           <h1>LEA - Laboratorio de Estudios Ambientales</h1>
           <p>El LEA tiene por objeto asistir a los sectores público y privado, para promover y mantener una mejor calidad de vida de la comunidad en su conjunto. Cuenta con infraestructura y equipamiento de alta tecnología, que sumado a su personal altamente calificado, está destinado a constituirse en una herramienta de características únicas para la generación y difusión del conocimiento y la innovación tecnológica.</p>
-          <div class="actions"><a class="btn primary" href="#servicios">Ver servicios</a><a class="btn secondary" href="#contacto">Contacto</a></div>
           <utn-search-bar />
         </div>
       </section>

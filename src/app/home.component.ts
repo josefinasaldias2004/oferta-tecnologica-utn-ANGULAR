@@ -90,17 +90,6 @@ interface SearchOption {
         </a>
       </section>
 
-      <section class="content home-needs" aria-labelledby="home-needs-title">
-        <p class="eyebrow">Accesos por necesidad</p>
-        <h2 id="home-needs-title">¿Qué necesitás resolver?</h2>
-        <div class="home-need-grid">
-          <a routerLink="/vinculacion" fragment="necesidad-operaciones">Mejorar procesos y resolver desafíos técnicos</a>
-          <a routerLink="/vinculacion" fragment="necesidad-capacitacion">Capacitar o certificar equipos</a>
-          <a routerLink="/vinculacion" fragment="necesidad-desarrollo">Desarrollar o evaluar soluciones</a>
-          <a routerLink="/vinculacion" fragment="necesidad-financiamiento">Consultar alternativas de financiamiento</a>
-          <a routerLink="/vinculacion" fragment="necesidad-transicion-energetica">Planificar la transición energética municipal</a>
-        </div>
-      </section>
     </main>
   `
 })

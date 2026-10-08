@@ -34,6 +34,10 @@ interface VinculationServiceGroup {
           <p class="eyebrow">Secretaría de Vinculación e Innovación Tecnológica · UTN San Nicolás</p>
           <h1>Soluciones técnicas para empresas y organizaciones</h1>
           <p>Mejorá procesos, capacitá equipos y desarrollá proyectos con especialistas de la Facultad Regional San Nicolás.</p>
+          <div class="vinc-hero-actions">
+            <a class="vinc-hero-primary" href="#servicios">Explorar servicios</a>
+            <a class="vinc-hero-secondary" href="#contacto">Contactar al equipo</a>
+          </div>
           <utn-search-bar [options]="searchOptions" searchLabel="Buscar servicios o necesidades" />
         </div>
       </section>
@@ -159,7 +163,10 @@ export class VinculacionHomeComponent {
       description: 'Propuestas para actualizar conocimientos, formar personal y evaluar competencias.',
       services: [
         this.serviceCard('capacitaciones-in-company', 'Capacitación'),
-        this.serviceCard('capacitacion-in-company', 'Capacitación', undefined, undefined, 'capacitaciones-in-company.jpg'),
+        {
+          ...this.serviceCard('capacitacion-in-company', 'Capacitación', undefined, undefined, 'capacitaciones-in-company.jpg'),
+          title: 'Capacitaciones a medida'
+        },
         this.serviceCard('capacitaciones-abiertas', 'Capacitación'),
         this.serviceCard('certificacion-de-oficios', 'Certificación'),
         this.serviceCard('centro-de-soldadura', 'Centro')

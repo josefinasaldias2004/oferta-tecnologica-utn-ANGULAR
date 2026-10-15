@@ -7,6 +7,7 @@ import { ServiceDetailComponent } from './service-detail.component';
 import { NotFoundComponent } from './not-found.component';
 import { VinculacionHomeComponent } from './vinculacion-landing.component';
 import { TransicionEnergeticaComponent } from './transicion-energetica.component';
+import { EntrepreneurCenterComponent } from './entrepreneur-center.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Oferta tecnológica | UTN FRSN' },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'vinculacion', component: VinculacionHomeComponent, title: 'Vinculación tecnológica | UTN FRSN' },
   { path: 'investigacion', component: ResearchGroupsComponent, title: 'Grupos de Investigación | UTN FRSN' },
   { path: 'vinculacion/transicion-energetica-municipal', component: TransicionEnergeticaComponent, title: 'Transición energética municipal y comunal | UTN FRSN' },
+  { path: 'vinculacion/centro-emprendedores', component: EntrepreneurCenterComponent, title: 'Centro de Emprendedores | UTN FRSN' },
   { path: 'vinculacion/:slug', component: ServiceDetailComponent },
   { path: '**', component: NotFoundComponent, title: 'Página no encontrada | UTN FRSN' }
 ];

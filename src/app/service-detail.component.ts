@@ -13,7 +13,10 @@ import { SERVICE_DETAILS, ServiceDetail, SERVICES } from './vinculacion.componen
 			<p class="eyebrow">Secretaría de Vinculación e Innovación Tecnológica</p>
 			<h1>{{ currentService.title }}</h1>
 			<p>{{ currentService.text }}</p>
-			<div class="detail-actions"><a class="breadcrumb" routerLink="/vinculacion">← Volver a servicios</a><a class="detail-contact-link" routerLink="/vinculacion" [queryParams]="{ servicio: currentService.title }" fragment="contacto">Consultar por este servicio</a></div>
+			<div class="detail-actions">
+				<a class="breadcrumb" routerLink="/vinculacion">← Volver a servicios</a>
+				<a class="detail-contact-link" routerLink="/vinculacion" [queryParams]="{ servicio: currentService.title }" fragment="contacto">Consultar por este servicio</a>
+			</div>
 		</div>
 	</section>
 	<section class="content detail">

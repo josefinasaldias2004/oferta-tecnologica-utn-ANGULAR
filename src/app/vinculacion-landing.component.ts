@@ -36,7 +36,7 @@ interface VinculationServiceGroup {
           <p>Mejorá procesos, capacitá equipos y desarrollá proyectos con especialistas de la Facultad Regional San Nicolás.</p>
           <div class="vinc-hero-actions">
             <a class="vinc-hero-primary" href="#servicios">Explorar servicios</a>
-            <a class="vinc-hero-secondary" href="#contacto">Contactar al equipo</a>
+            <a class="vinc-hero-secondary" href="#contacto">Contactanos</a>
           </div>
           <utn-search-bar [options]="searchOptions" searchLabel="Buscar servicios o necesidades" />
         </div>
@@ -52,10 +52,10 @@ interface VinculationServiceGroup {
           <a class="vinc-need-link" routerLink="/vinculacion/transformacion-digital">Querés automatizar un proceso</a>
           <a class="vinc-need-link" routerLink="/vinculacion/asistencia-tecnica">Necesitás mejorar procesos o reducir costos</a>
           <a class="vinc-need-link" routerLink="/vinculacion/asesoramiento-tecnico">Buscás diagnóstico y acompañamiento técnico</a>
+          <a class="vinc-need-link" href="#emprendimiento">Tenés una idea y querés convertirla en proyecto</a>
           <a class="vinc-need-link" routerLink="/investigacion">Querés desarrollar un producto o prototipo</a>
           <a class="vinc-need-link" routerLink="/vinculacion/certificacion-de-oficios">Necesitás evaluar competencias de oficio</a>
           <a class="vinc-need-link" routerLink="/lea">Buscás ensayos o mediciones</a>
-          <a class="vinc-need-link" routerLink="/vinculacion/financiamiento">Consultás por financiamiento para innovar</a>
           <a class="vinc-need-link" routerLink="/vinculacion/capacitaciones-in-company">Querés capacitar a tu equipo</a>
           <a class="vinc-need-link" routerLink="/vinculacion/transicion-energetica-municipal">Municipio o comuna: planificar la transición energética</a>
         </div>
@@ -84,6 +84,36 @@ interface VinculationServiceGroup {
           </div>
         </section>
 
+      </section>
+
+      <section class="content vinc-entrepreneurship" id="emprendimiento" aria-labelledby="vinc-entrepreneurship-title">
+        <div class="section-heading">
+          <p class="eyebrow">Emprendimiento e innovación</p>
+          <h2 id="vinc-entrepreneurship-title">Centro de Emprendedores FRSN</h2>
+          <p>El Centro de Emprendimiento e Innovación de UTN San Nicolás impulsa espacios para transformar ideas en proyectos y desarrollar soluciones innovadoras en equipo.</p>
+        </div>
+        <div class="vinc-entrepreneurship-grid">
+          <article class="vinc-entrepreneurship-card">
+            <span class="vinc-entrepreneurship-kind">Ideas y proyectos</span>
+            <h3>Convertir una idea en un proyecto viable</h3>
+            <p>Las actividades de validación ayudan a analizar el potencial de una idea, detectar riesgos y dar los primeros pasos para convertirla en un proyecto.</p>
+            <p><strong>¿A quiénes está dirigido?</strong> A emprendedores, estudiantes y profesionales.</p>
+            <p><strong>¿Cómo se trabaja?</strong> Con herramientas sencillas, ejemplos reales y dinámicas prácticas para evaluar y mejorar cada propuesta.</p>
+          </article>
+          <article class="vinc-entrepreneurship-card">
+            <span class="vinc-entrepreneurship-kind">Innovación colaborativa</span>
+            <h3>Resolver desafíos reales en equipo</h3>
+            <p>El Rally Latinoamericano de Innovación convoca a estudiantes de distintas carreras a idear soluciones creativas y viables frente a problemas reales con impacto social o ambiental.</p>
+            <p>En la edición difundida por UTN FRSN en 2026, los equipos fueron de 4 a 10 integrantes, incluyeron estudiantes de ingeniería y al menos una mujer, y trabajaron durante 28 horas consecutivas.</p>
+          </article>
+        </div>
+        <div class="vinc-entrepreneurship-footer">
+          <p>Información basada en actividades difundidas por UTN FRSN entre 2023 y 2026.</p>
+          <div class="vinc-entrepreneurship-actions">
+            <a class="vinc-entrepreneurship-cta" routerLink="/vinculacion/centro-emprendedores">Conocer el Centro</a>
+            <a class="vinc-entrepreneurship-secondary-cta" href="#contacto">Contactanos</a>
+          </div>
+        </div>
       </section>
 
       <section class="content vinc-capabilities" aria-labelledby="vinc-capabilities-title">
@@ -178,6 +208,15 @@ export class VinculacionHomeComponent {
       description: 'Centros y capacidades para proyectos, innovación, transformación digital y análisis especializados.',
       services: [
         this.serviceCard('citi', 'Centro'),
+        {
+          slug: 'centro-emprendedores',
+          title: 'Centro de Emprendedores FRSN',
+          text: 'Conocé sus iniciativas para validar ideas, impulsar proyectos y promover la innovación con impacto.',
+          route: '/vinculacion/centro-emprendedores',
+          kind: 'Centro',
+          image: 'FONDO UTN.jpg',
+          imageAlt: 'Edificio de la UTN Facultad Regional San Nicolás'
+        },
         this.serviceCard('investigacion-y-desarrollo', 'Desarrollo'),
         this.serviceCard('transformacion-digital', 'Servicio'),
         this.serviceCard('laboratorios-y-ensayos', 'Laboratorio', '/lea')
@@ -191,14 +230,6 @@ export class VinculacionHomeComponent {
         this.serviceCard('transicion-energetica-municipal', 'Propuesta municipal', '/vinculacion/transicion-energetica-municipal')
       ]
     },
-    {
-      id: 'necesidad-financiamiento',
-      title: 'Explorar alternativas de financiamiento',
-      description: 'La orientación y la disponibilidad de herramientas se consultan para cada proyecto.',
-      services: [
-        this.serviceCard('financiamiento', 'Orientación', undefined, 'Información sobre ANR, FONTAR, FONARSEC, créditos y formulación de proyectos. La pertinencia y disponibilidad deben consultarse para cada caso.', 'FONDO UTN.jpg')
-      ]
-    }
   ];
   searchOptions: SearchOption[] = this.serviceGroups.flatMap((group) => group.services.map((service) => ({
     label: service.title,

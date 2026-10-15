@@ -199,6 +199,38 @@ a {
 .service-image-hero .breadcrumb {
   color: #ffffff;
 }
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.detail-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  text-decoration: none;
+}
+.detail-actions .breadcrumb {
+  background: #ffffff;
+  color: var(--blue);
+}
+.detail-actions .detail-contact-link {
+  background: var(--blue);
+  color: #ffffff;
+}
+.detail-actions a:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
 .home-hero {
   position: relative;
   isolation: isolate;
@@ -1986,6 +2018,270 @@ button {
   color: var(--blue);
   font-weight: 700;
 }
+.vinc-entrepreneurship {
+  border-top: 1px solid var(--vinc-line);
+}
+.vinc-entrepreneurship-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.vinc-entrepreneurship-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  border: 1px solid var(--vinc-line);
+  border-top: 3px solid var(--orange);
+  border-radius: 6px;
+  background: var(--vinc-surface);
+  color: var(--ink);
+  box-shadow: 0 8px 22px rgba(16, 42, 67, 0.06);
+}
+.vinc-entrepreneurship-kind {
+  width: fit-content;
+  margin-bottom: 10px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: rgba(19, 99, 223, 0.09);
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.vinc-entrepreneurship-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+.vinc-entrepreneurship-card p {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+.vinc-entrepreneurship-card p:last-child {
+  margin-bottom: 0;
+}
+.vinc-entrepreneurship-card p strong {
+  color: var(--ink);
+}
+.vinc-entrepreneurship-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+}
+.vinc-entrepreneurship-footer > p {
+  flex: 1 1 420px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.vinc-entrepreneurship-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.vinc-entrepreneurship-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 4px;
+  background: var(--blue);
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+.vinc-entrepreneurship-secondary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  color: var(--blue);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+.vinc-entrepreneurship-cta:hover {
+  filter: brightness(1.08);
+}
+.vinc-entrepreneurship-cta:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+.vinc-entrepreneurship-secondary-cta:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+.vinc-entrepreneurship-page .vinc-hero {
+  min-height: 420px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 20, 40, 0.96) 0%,
+      rgba(7, 20, 40, 0.88) 38%,
+      rgba(7, 20, 40, 0.54) 68%,
+      rgba(7, 20, 40, 0.24) 100%
+    ),
+    url("/vinculacion/assets/centro-emprendedores-portada.svg") center 48% / cover;
+}
+.vinc-entrepreneurship-back {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.vinc-entrepreneurship-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+.vinc-entrepreneurship-outline-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+.vinc-entrepreneurship-outline-cta:hover {
+  background: #ffffff24;
+}
+.vinc-entrepreneurship-intro {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  gap: 36px;
+  border-bottom: 1px solid var(--vinc-line);
+}
+.vinc-entrepreneurship-intro h2,
+.vinc-entrepreneurship-audience h2,
+.vinc-entrepreneurship-contact h2 {
+  margin: 6px 0 10px;
+}
+.vinc-entrepreneurship-intro > div:last-child p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.vinc-entrepreneurship-intro > div:last-child p:last-child {
+  margin-bottom: 0;
+}
+.vinc-entrepreneurship-activities {
+  border-bottom: 1px solid var(--vinc-line);
+}
+.vinc-entrepreneurship-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.vinc-entrepreneurship-history-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid var(--vinc-line);
+  border-top: 3px solid var(--orange);
+  border-radius: 6px;
+  background: var(--vinc-surface);
+  box-shadow: 0 8px 22px rgba(16, 42, 67, 0.06);
+}
+.vinc-entrepreneurship-year {
+  margin-bottom: 10px;
+  color: var(--blue);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.vinc-entrepreneurship-history-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+.vinc-entrepreneurship-history-card p,
+.vinc-entrepreneurship-history-card li {
+  color: var(--muted);
+  line-height: 1.6;
+}
+.vinc-entrepreneurship-history-card p {
+  margin: 0 0 10px;
+}
+.vinc-entrepreneurship-history-card ul {
+  margin: 0 0 14px;
+  padding-left: 20px;
+}
+.vinc-entrepreneurship-history-card strong {
+  color: var(--ink);
+}
+.vinc-entrepreneurship-history-card > a {
+  margin-top: auto;
+  padding-top: 8px;
+  color: var(--blue);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.vinc-entrepreneurship-history-card > a:hover {
+  text-decoration: underline;
+}
+.vinc-entrepreneurship-audience {
+  border-bottom: 1px solid var(--vinc-line);
+}
+.vinc-entrepreneurship-audience-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.9fr);
+  align-items: center;
+  gap: 32px;
+  padding: 28px;
+  border-left: 4px solid var(--orange);
+  background: var(--vinc-surface);
+}
+.vinc-entrepreneurship-audience-panel > div:first-child > p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+.vinc-entrepreneurship-audience-list {
+  display: grid;
+  gap: 10px;
+}
+.vinc-entrepreneurship-audience-list span {
+  padding: 10px 12px;
+  border: 1px solid var(--vinc-line);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 600;
+}
+.vinc-entrepreneurship-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 44px;
+  padding: 28px;
+  border: 1px solid var(--vinc-line);
+  background: var(--vinc-surface);
+  scroll-margin-top: 88px;
+}
+.vinc-entrepreneurship-contact > div > p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+.vinc-entrepreneurship-page a:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
 .vinc-capabilities {
   border-top: 1px solid var(--vinc-line);
 }
@@ -2156,11 +2452,14 @@ button {
   outline-offset: 3px;
 }
 #servicios,
-#contacto {
+#emprendimiento,
+#contacto,
+#contacto-cei {
   scroll-margin-top: 88px;
 }
 @media (max-width: 900px) {
-  .vinc-service-grid {
+  .vinc-service-grid,
+  .vinc-entrepreneurship-timeline {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .vinc-need-grid {
@@ -2175,10 +2474,27 @@ button {
     font-size: 2.45rem;
   }
   .vinc-service-grid,
+  .vinc-entrepreneurship-grid,
+  .vinc-entrepreneurship-timeline,
+  .vinc-entrepreneurship-intro,
+  .vinc-entrepreneurship-audience-panel,
   .vinc-departments,
   .vinc-start-list,
   .vinc-contact {
     grid-template-columns: 1fr;
+  }
+  .vinc-entrepreneurship-page .vinc-hero {
+    min-height: 0;
+  }
+  .vinc-entrepreneurship-intro {
+    gap: 16px;
+  }
+  .vinc-entrepreneurship-audience-panel,
+  .vinc-entrepreneurship-contact {
+    padding: 22px 5vw;
+  }
+  .vinc-entrepreneurship-footer {
+    align-items: flex-start;
   }
   .vinc-contact {
     gap: 24px;

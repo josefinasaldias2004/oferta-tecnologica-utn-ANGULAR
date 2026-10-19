@@ -123,11 +123,11 @@ interface VinculationServiceGroup {
           <p>Estas áreas pueden ayudar a identificar por dónde orientar una consulta o proyecto.</p>
         </div>
         <dl class="vinc-departments">
-          <div><dt>Ingeniería Industrial</dt><dd>Mejora continua, simulación, logística y costos.</dd></div>
-          <div><dt>Ingeniería Electrónica</dt><dd>Automatización, electrónica industrial e IoT.</dd></div>
-          <div><dt>Ingeniería Mecánica</dt><dd>Diseño mecánico, elementos finitos y materiales.</dd></div>
-          <div><dt>Ingeniería en Sistemas</dt><dd>Software, inteligencia artificial, datos y ciberseguridad.</dd></div>
-          <div><dt>Ingeniería Metalúrgica</dt><dd>Caracterización y ensayos.</dd></div>
+          <div><dt><a routerLink="/vinculacion/asistencia-tecnica">Ingeniería Industrial <span>Ver servicio</span></a></dt><dd>Mejora continua, simulación, logística y costos.</dd></div>
+          <div><dt><a routerLink="/vinculacion/transformacion-digital">Ingeniería Electrónica <span>Ver servicio</span></a></dt><dd>Automatización, electrónica industrial e IoT.</dd></div>
+          <div><dt><a routerLink="/vinculacion/asesoramiento-tecnico">Ingeniería Mecánica <span>Ver servicio</span></a></dt><dd>Diseño mecánico, elementos finitos y materiales.</dd></div>
+          <div><dt><a routerLink="/vinculacion/transformacion-digital">Ingeniería en Sistemas <span>Ver servicio</span></a></dt><dd>Software, inteligencia artificial, datos y ciberseguridad.</dd></div>
+          <div><dt><a routerLink="/vinculacion/laboratorios-y-ensayos">Ingeniería Metalúrgica <span>Ver servicio</span></a></dt><dd>Caracterización y ensayos.</dd></div>
         </dl>
       </section>
 

@@ -23,7 +23,7 @@
 }
 html {
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 body {
   margin: 0;
@@ -2298,6 +2298,24 @@ button {
 .vinc-departments dt {
   font-weight: 700;
 }
+.vinc-departments dt a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  color: var(--blue);
+  text-decoration: none;
+}
+.vinc-departments dt a span {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.vinc-departments dt a:hover span,
+.vinc-departments dt a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .vinc-departments dd {
   margin: 4px 0 0;
   color: var(--muted);
@@ -2318,47 +2336,102 @@ button {
   line-height: 1.55;
 }
 .vinc-contact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 0.95fr);
   align-items: start;
   gap: 36px;
   margin-bottom: 44px;
-  padding: 36px;
-  border: 1px solid var(--vinc-line);
-  background: var(--vinc-surface);
+  padding: clamp(28px, 4vw, 52px);
+  border: 0;
+  border-radius: 18px;
+  background: linear-gradient(130deg, #102a43 0%, #123c59 62%, #14506c 100%);
+  box-shadow: 0 22px 48px rgba(16, 42, 67, 0.2);
   scroll-margin-top: 88px;
 }
+.vinc-contact::before {
+  position: absolute;
+  z-index: -1;
+  top: -170px;
+  right: -110px;
+  width: 440px;
+  height: 440px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 36px rgba(255, 255, 255, 0.035),
+    0 0 0 76px rgba(255, 255, 255, 0.025);
+  content: "";
+  pointer-events: none;
+}
+.vinc-contact-info {
+  padding-top: 8px;
+}
+.vinc-contact-info .eyebrow {
+  color: #ffbf86;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 .vinc-contact h2 {
-  margin: 6px 0 12px;
+  max-width: 520px;
+  margin: 8px 0 16px;
+  color: #ffffff;
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  line-height: 1.15;
 }
 .vinc-contact-info > p {
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.82);
 }
 .vinc-contact-info .vinc-email {
-  margin: 22px 0 8px;
+  margin: 24px 0 10px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 3px solid #f97316;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.vinc-contact-info .vinc-email strong {
+  display: inline-block;
+  margin-bottom: 4px;
+  color: #ffffff;
+}
+.vinc-contact-info a {
+  color: #ffd6a8;
+  font-weight: 700;
+  overflow-wrap: anywhere;
 }
 .vinc-copy-button {
+  min-height: 40px;
   padding: 8px 12px;
-  border: 1px solid var(--vinc-line);
-  border-radius: 4px;
-  background: transparent;
-  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
   font: inherit;
+  font-weight: 600;
   cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+.vinc-copy-button:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
 }
 .vinc-copy-status {
   min-height: 1.4em;
   margin: 4px 0 12px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 0.9rem !important;
 }
 .vinc-special-contacts {
   margin-top: 18px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.82);
 }
 .vinc-special-contacts summary {
   width: fit-content;
-  color: var(--ink);
+  color: #ffffff;
   font-weight: 700;
   cursor: pointer;
 }
@@ -2370,16 +2443,22 @@ button {
   display: grid;
   gap: 14px;
   min-width: 0;
-  padding: 22px;
-  border: 1px solid var(--vinc-line);
-  background: var(--paper);
+  padding: clamp(20px, 2.5vw, 30px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  background: #ffffff;
+  color: #102a43;
+  box-shadow: 0 16px 36px rgba(3, 16, 31, 0.2);
 }
 .vinc-contact-form h3,
 .vinc-contact-form p {
   margin: 0;
 }
+.vinc-contact-form h3 {
+  font-size: 1.4rem;
+}
 .vinc-contact-form > p {
-  color: var(--muted);
+  color: #52606d;
 }
 .vinc-contact-form label {
   display: grid;
@@ -2394,8 +2473,8 @@ button {
 .vinc-contact-form input,
 .vinc-contact-form textarea {
   min-width: 0;
-  border-radius: 4px;
-  background: var(--vinc-surface);
+  border-radius: 7px;
+  background: #f8fafc;
   color: var(--ink);
 }
 .vinc-context-note {
@@ -2430,7 +2509,21 @@ button {
   --vinc-surface: #14283d;
 }
 :root.dark-theme .vinc-contact {
-  background: #0f2032;
+  background: linear-gradient(130deg, #0b1726 0%, #102a43 62%, #123c59 100%);
+}
+:root.dark-theme .vinc-contact-form {
+  border-color: #324a60;
+  background: #14283d;
+  color: #edf4fb;
+}
+:root.dark-theme .vinc-contact-form > p {
+  color: #b8c8d8;
+}
+:root.dark-theme .vinc-contact-form input,
+:root.dark-theme .vinc-contact-form textarea {
+  border-color: #557089;
+  background: #0b1726;
+  color: #edf4fb;
 }
 :root.dark-theme .search-empty {
   border-color: #324a60;

@@ -76,7 +76,7 @@ interface VinculationServiceGroup {
           <div class="vinc-service-grid">
             <a class="vinc-service-item" *ngFor="let service of group.services" [routerLink]="service.route">
               <span class="vinc-service-kind">{{ service.kind }}</span>
-              <img [src]="'/vinculacion/assets/' + service.image" [alt]="service.imageAlt" loading="lazy">
+              <img [src]="service.image.startsWith('http') ? service.image : '/vinculacion/assets/' + service.image" [alt]="service.imageAlt" loading="lazy">
               <h4>{{ service.title }}</h4>
               <p>{{ service.text }}</p>
               <span class="vinc-service-link">Ver detalles <span aria-hidden="true">→</span></span>
@@ -259,7 +259,9 @@ export class VinculacionHomeComponent {
       route: routeOverride ?? (slug === 'investigacion-y-desarrollo' ? '/investigacion' : `/vinculacion/${slug}`),
       kind,
       image: imageOverride ?? (service.image || 'FONDO UTN.jpg'),
-      imageAlt: service.image || imageOverride ? service.title : 'Edificio de la UTN Facultad Regional San Nicolás'
+      imageAlt: slug === 'transicion-energetica-municipal'
+        ? 'Molinos eólicos y paneles solares en un parque de energía renovable'
+        : service.image || imageOverride ? service.title : 'Edificio de la UTN Facultad Regional San Nicolás'
     };
   }
 

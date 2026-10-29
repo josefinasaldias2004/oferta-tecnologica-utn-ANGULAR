@@ -35,8 +35,8 @@ interface VinculationServiceGroup {
           <h1>Soluciones técnicas para empresas y organizaciones</h1>
           <p>Mejorá procesos, capacitá equipos y desarrollá proyectos con especialistas de la Facultad Regional San Nicolás.</p>
           <div class="vinc-hero-actions">
-            <a class="vinc-hero-primary" href="#servicios">Explorar servicios</a>
-            <a class="vinc-hero-secondary" href="#contacto">Contactanos</a>
+            <a class="vinc-hero-primary" routerLink="/vinculacion" fragment="servicios">Explorar servicios</a>
+            <a class="vinc-hero-secondary" routerLink="/vinculacion" fragment="contacto">Contactanos</a>
           </div>
           <utn-search-bar [options]="searchOptions" searchLabel="Buscar servicios o necesidades" />
         </div>
@@ -52,7 +52,7 @@ interface VinculationServiceGroup {
           <a class="vinc-need-link" routerLink="/vinculacion/transformacion-digital">Querés automatizar un proceso</a>
           <a class="vinc-need-link" routerLink="/vinculacion/asistencia-tecnica">Necesitás mejorar procesos o reducir costos</a>
           <a class="vinc-need-link" routerLink="/vinculacion/asesoramiento-tecnico">Buscás diagnóstico y acompañamiento técnico</a>
-          <a class="vinc-need-link" href="#emprendimiento">Tenés una idea y querés convertirla en proyecto</a>
+          <a class="vinc-need-link" routerLink="/vinculacion" fragment="emprendimiento">Tenés una idea y querés convertirla en proyecto</a>
           <a class="vinc-need-link" routerLink="/investigacion">Querés desarrollar un producto o prototipo</a>
           <a class="vinc-need-link" routerLink="/vinculacion/certificacion-de-oficios">Necesitás evaluar competencias de oficio</a>
           <a class="vinc-need-link" routerLink="/lea">Buscás ensayos o mediciones</a>
@@ -111,7 +111,7 @@ interface VinculationServiceGroup {
           <p>Información basada en actividades difundidas por UTN FRSN entre 2023 y 2026.</p>
           <div class="vinc-entrepreneurship-actions">
             <a class="vinc-entrepreneurship-cta" routerLink="/vinculacion/centro-emprendedores">Conocer el Centro</a>
-            <a class="vinc-entrepreneurship-secondary-cta" href="#contacto">Contactanos</a>
+            <a class="vinc-entrepreneurship-secondary-cta" routerLink="/vinculacion" fragment="contacto">Contactanos</a>
           </div>
         </div>
       </section>
@@ -122,13 +122,33 @@ interface VinculationServiceGroup {
           <h2 id="vinc-capabilities-title">Capacidades por departamento</h2>
           <p>Estas áreas pueden ayudar a identificar por dónde orientar una consulta o proyecto.</p>
         </div>
-        <dl class="vinc-departments">
-          <div><dt><a routerLink="/vinculacion/asistencia-tecnica">Ingeniería Industrial <span>Ver servicio</span></a></dt><dd>Mejora continua, simulación, logística y costos.</dd></div>
-          <div><dt><a routerLink="/vinculacion/transformacion-digital">Ingeniería Electrónica <span>Ver servicio</span></a></dt><dd>Automatización, electrónica industrial e IoT.</dd></div>
-          <div><dt><a routerLink="/vinculacion/asesoramiento-tecnico">Ingeniería Mecánica <span>Ver servicio</span></a></dt><dd>Diseño mecánico, elementos finitos y materiales.</dd></div>
-          <div><dt><a routerLink="/vinculacion/transformacion-digital">Ingeniería en Sistemas <span>Ver servicio</span></a></dt><dd>Software, inteligencia artificial, datos y ciberseguridad.</dd></div>
-          <div><dt><a routerLink="/vinculacion/laboratorios-y-ensayos">Ingeniería Metalúrgica <span>Ver servicio</span></a></dt><dd>Caracterización y ensayos.</dd></div>
-        </dl>
+        <button
+          class="vinc-departments-toggle"
+          type="button"
+          [attr.aria-expanded]="showDepartments"
+          aria-controls="vinc-departments-list"
+          (click)="showDepartments = !showDepartments"
+        >
+          {{ showDepartments ? 'Ocultar departamentos' : 'Ver departamentos' }}
+          <span class="vinc-special-contacts-chevron" [class.is-expanded]="showDepartments" aria-hidden="true"></span>
+        </button>
+        <div
+          id="vinc-departments-list"
+          class="vinc-departments-panel"
+          [class.is-open]="showDepartments"
+          [attr.aria-hidden]="!showDepartments"
+          [attr.inert]="showDepartments ? null : ''"
+        >
+          <div class="vinc-departments-panel-inner">
+            <dl class="vinc-departments">
+              <div><dt><a routerLink="/vinculacion/asistencia-tecnica">Ingeniería Industrial <span>Ver servicio</span></a></dt><dd>Mejora continua, simulación, logística y costos.</dd></div>
+              <div><dt><a routerLink="/vinculacion/transformacion-digital">Ingeniería Electrónica <span>Ver servicio</span></a></dt><dd>Automatización, electrónica industrial e IoT.</dd></div>
+              <div><dt><a routerLink="/vinculacion/asesoramiento-tecnico">Ingeniería Mecánica <span>Ver servicio</span></a></dt><dd>Diseño mecánico, elementos finitos y materiales.</dd></div>
+              <div><dt><a routerLink="/vinculacion/transformacion-digital">Ingeniería en Sistemas <span>Ver servicio</span></a></dt><dd>Software, inteligencia artificial, datos y ciberseguridad.</dd></div>
+              <div><dt><a routerLink="/vinculacion/laboratorios-y-ensayos">Ingeniería Metalúrgica <span>Ver servicio</span></a></dt><dd>Caracterización y ensayos.</dd></div>
+            </dl>
+          </div>
+        </div>
       </section>
 
       <section class="content vinc-start" aria-labelledby="vinc-start-title">
@@ -152,12 +172,31 @@ interface VinculationServiceGroup {
           <p class="vinc-email"><strong>Correo general</strong><br><a href="mailto:vinculacionfrsn@frsn.utn.edu.ar">vinculacionfrsn@frsn.utn.edu.ar</a></p>
           <button class="vinc-copy-button" type="button" (click)="copyEmail()">Copiar dirección</button>
           <p class="vinc-copy-status" aria-live="polite">{{ copyStatus }}</p>
-          <details class="vinc-special-contacts">
-            <summary>Contactos especializados</summary>
-            <p>Capacitación: <a href="mailto:capacitacionUVT@frsn.utn.edu.ar">capacitacionUVT@frsn.utn.edu.ar</a></p>
-            <p>Certificaciones: <a href="mailto:certificacionesfrsn@frsn.utn.edu.ar">certificacionesfrsn@frsn.utn.edu.ar</a></p>
-            <p>Auditorías de tanques: <a href="mailto:tanquesFRSN@frsn.utn.edu.ar">tanquesFRSN@frsn.utn.edu.ar</a></p>
-          </details>
+          <section class="vinc-special-contacts">
+            <button
+              class="vinc-special-contacts-toggle"
+              type="button"
+              [attr.aria-expanded]="showSpecialContacts"
+              aria-controls="vinc-special-contacts-list"
+              (click)="showSpecialContacts = !showSpecialContacts"
+            >
+              Contactos especializados
+              <span class="vinc-special-contacts-chevron" [class.is-expanded]="showSpecialContacts" aria-hidden="true"></span>
+            </button>
+            <div
+              id="vinc-special-contacts-list"
+              class="vinc-special-contacts-list"
+              [class.is-open]="showSpecialContacts"
+              [attr.aria-hidden]="!showSpecialContacts"
+              [attr.inert]="showSpecialContacts ? null : ''"
+            >
+              <div class="vinc-special-contacts-list-content">
+                <p>Capacitación: <a href="mailto:capacitacionUVT@frsn.utn.edu.ar">capacitacionUVT@frsn.utn.edu.ar</a></p>
+                <p>Certificaciones: <a href="mailto:certificacionesfrsn@frsn.utn.edu.ar">certificacionesfrsn@frsn.utn.edu.ar</a></p>
+                <p>Auditorías de tanques: <a href="mailto:tanquesFRSN@frsn.utn.edu.ar">tanquesFRSN@frsn.utn.edu.ar</a></p>
+              </div>
+            </div>
+          </section>
         </div>
 
         <form class="vinc-contact-form" (ngSubmit)="send()">
@@ -242,6 +281,8 @@ export class VinculacionHomeComponent {
   organization = '';
   message = '';
   copyStatus = '';
+  showSpecialContacts = true;
+  showDepartments = true;
 
   constructor(route: ActivatedRoute) {
     this.serviceContext = route.snapshot.queryParamMap.get('servicio') ?? '';

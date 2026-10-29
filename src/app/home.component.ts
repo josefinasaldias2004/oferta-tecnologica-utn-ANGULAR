@@ -100,6 +100,7 @@ export class HomeComponent implements OnDestroy {
   searchHints = ['Vinculación', 'LEA', 'Extensión', 'Investigación'];
   activeHeroSlide = 0;
   heroImages = [
+    '/secretaria-extension-universitaria-main/assets/FONDO%20UTN.jpg',
     '/vinculacion/assets/FONDO%20UTN.jpg',
     '/vinculacion/assets/asesoramiento-tecnico.jpg',
     '/vinculacion/assets/capacitaciones-in-company.jpg',

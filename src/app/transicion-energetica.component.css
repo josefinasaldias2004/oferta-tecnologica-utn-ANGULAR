@@ -22,6 +22,8 @@
   color: #ffb77d;
 }
 .energy-hero {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
   --energy-overlay: linear-gradient(
     90deg,
     rgba(7, 20, 40, 0.94) 0%,

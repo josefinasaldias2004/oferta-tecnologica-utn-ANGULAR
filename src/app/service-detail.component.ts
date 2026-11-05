@@ -8,7 +8,7 @@ import { SERVICE_DETAILS, ServiceDetail, SERVICES } from './vinculacion.componen
 <utn-header />
 <main class="page" *ngIf="service as currentService">
 	<section class="hero compact" [class.service-image-hero]="!!currentService.image">
-		<img *ngIf="currentService.image" class="service-hero-background" [src]="'/vinculacion/assets/' + currentService.image" alt="" aria-hidden="true">
+		<img *ngIf="currentService.image" class="service-hero-background" [src]="'/vinculacion/assets/' + currentService.image" [alt]="serviceImageAlt(currentService)">
 		<div class="container">
 			<p class="eyebrow">Secretaría de Vinculación e Innovación Tecnológica</p>
 			<h1>{{ currentService.title }}</h1>
@@ -47,8 +47,27 @@ import { SERVICE_DETAILS, ServiceDetail, SERVICES } from './vinculacion.componen
 export class ServiceDetailComponent {
 	service: ServiceDetail | undefined;
 
+	private readonly serviceImageDescriptions: Record<string, string> = {
+		'asesoramiento-tecnico': 'Asistentes participan de una capacitación técnica en un aula.',
+		'asistencia-tecnica': 'Ilustración de una lista de verificación y un símbolo de aprobación.',
+		'auditorias-de-tanques': 'Tanques industriales de almacenamiento en una planta.',
+		'capacitaciones-in-company': 'Equipo de trabajo participa en una reunión de planificación.',
+		'capacitaciones-abiertas': 'Personas asisten a una capacitación en un aula.',
+		'centro-de-soldadura': 'Operario realiza una soldadura y genera chispas en un taller.',
+		'certificacion-de-oficios': 'Participantes realizan una práctica de soldadura en un taller.',
+		citi: 'Edificio de la Universidad Tecnológica Nacional, Facultad Regional San Nicolás.',
+		'investigacion-y-desarrollo': 'Ilustración de una lamparita encendida que representa nuevas ideas.',
+		'laboratorios-y-ensayos': 'Ilustración de un matraz de laboratorio con muestras.',
+		'transformacion-digital': 'Ilustración de una pantalla con gráficos y datos.',
+		'transicion-energetica-municipal': 'Molinos eólicos y paneles solares en un parque de energía renovable.'
+	};
+
 	constructor(route: ActivatedRoute) {
 		const slug = route.snapshot.paramMap.get('slug');
 		this.service = SERVICE_DETAILS[slug ?? ''] ?? SERVICES.find((item) => item.slug === slug);
+	}
+
+	serviceImageAlt(service: ServiceDetail): string {
+		return this.serviceImageDescriptions[service.slug] ?? `Imagen relacionada con ${service.title}.`;
 	}
 }

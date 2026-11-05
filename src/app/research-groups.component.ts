@@ -439,7 +439,9 @@ const GROUPS: ResearchGroup[] = [
           <div class="research-list">
             @for (group of filteredGroups(); track group.name) {
               <article class="research-card">
-                <div class="research-image" [class]="'image-' + group.image" role="img" [attr.aria-label]="'Imagen temática de ' + group.name"><span></span></div>
+                <div class="research-image" [class]="'image-' + group.image">
+                  <img src="/assets/research-group-illustration.svg" [alt]="'Ilustración abstracta del área de ' + group.name + ', representada con círculos y formas geométricas.'" />
+                </div>
                 <div class="research-card-body">
                   <p class="department">{{ group.department }}</p>
                   <h3>{{ group.name }}<small *ngIf="group.acronym"> · {{ group.acronym }}</small></h3>

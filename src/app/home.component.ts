@@ -72,7 +72,7 @@ interface SearchOption {
         </a>
         <a routerLink="/lea" class="tile">
           <img src="/pagina-lea/assets/lea-fondo.jfif" loading="lazy" alt="Laboratorio de estudios ambientales">
-          <h2>LEA</h2>
+          <h2>Laboratorio de Estudios Ambientales</h2>
           <p>Laboratorio de Estudios Ambientales, análisis y servicios especializados.</p>
           <span>Entrar al LEA</span>
         </a>

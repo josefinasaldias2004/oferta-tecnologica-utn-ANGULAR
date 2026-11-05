@@ -493,7 +493,7 @@ const GROUPS: ResearchGroup[] = [
                         <p class="eyebrow">Propuesta de valor</p>
                         <h3>Qué resuelve para una organización</h3>
                         <p>{{ group.valueProposition ?? 'Transformar conocimiento especializado en análisis, desarrollos y soluciones aplicadas para empresas e instituciones.' }}</p>
-                        <a class="external-link" [href]="'mailto:' + group.email">Contactar al grupo</a>
+                        <a class="external-link" [href]="'mailto:' + group.email" (click)="requestContact(group, $event)">Contactar al grupo</a>
                         <a *ngIf="group.link" class="external-link" [href]="group.link" target="_blank" rel="noopener">Visitar sitio del grupo</a>
                       </div>
                     </article>
@@ -555,8 +555,68 @@ const GROUPS: ResearchGroup[] = [
         }
       </section>
     </main>
+    @if (contactConfirmationGroup()) {
+      <div class="contact-confirmation-backdrop" (click)="cancelContact($event)">
+        <section class="contact-confirmation" role="dialog" aria-modal="true" aria-labelledby="contact-confirmation-title" (click)="$event.stopPropagation()">
+          <h2 id="contact-confirmation-title">¿Deseas salir de la página y abrir el mail?</h2>
+          <div class="contact-confirmation-actions">
+            <button type="button" (click)="confirmContact()">Sí</button>
+            <button type="button" (click)="cancelContact()">No</button>
+          </div>
+        </section>
+      </div>
+    }
   `,
   styles: [`
+  .contact-confirmation-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: rgba(15, 23, 42, .6);
+  }
+
+  .contact-confirmation {
+    width: min(100%, 420px);
+    padding: 1.75rem;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, .25);
+    text-align: center;
+  }
+
+  .contact-confirmation h2 {
+    margin: 0 0 1.5rem;
+    color: #1e293b;
+    font-size: 1.2rem;
+    line-height: 1.45;
+  }
+
+  .contact-confirmation-actions {
+    display: flex;
+    justify-content: center;
+    gap: .75rem;
+  }
+
+  .contact-confirmation-actions button {
+    min-width: 90px;
+    padding: .65rem 1rem;
+    border: 0;
+    border-radius: 8px;
+    background: var(--primary, #1d526f);
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+  }
+
+  .contact-confirmation-actions button:last-child {
+    background: #e2e8f0;
+    color: #1e293b;
+  }
+
   .group-detail {
   grid-column: 1 / -1 !important;
   width: 100% !important;
@@ -768,6 +828,7 @@ export class ResearchGroupsComponent {
   searchTerm = signal('');
   selectedDepartment = signal('Todos');
   selectedGroup = signal<ResearchGroup | null>(null);
+  contactConfirmationGroup = signal<ResearchGroup | null>(null);
 
   departments = computed(() => [...new Set(this.groups.map((group) => group.department))]);
 
@@ -816,6 +877,24 @@ export class ResearchGroupsComponent {
     this.selectedGroup.set(null);
   }
 
+  requestContact(group: ResearchGroup, event: Event): void {
+    event.preventDefault();
+    this.contactConfirmationGroup.set(group);
+  }
+
+  confirmContact(): void {
+    const group = this.contactConfirmationGroup();
+    if (!group) return;
+
+    this.contactConfirmationGroup.set(null);
+    window.location.href = `mailto:${group.email}`;
+  }
+
+  cancelContact(event?: Event): void {
+    event?.stopPropagation();
+    this.contactConfirmationGroup.set(null);
+  }
+
   private updateQueryParams(): void {
     this.router.navigate([], {
       queryParams: {
@@ -827,4 +906,3 @@ export class ResearchGroupsComponent {
     });
   }
 }
-

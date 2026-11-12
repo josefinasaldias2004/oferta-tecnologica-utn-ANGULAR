@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -13,13 +13,13 @@ interface SearchOption {
 @Component({
   selector: 'utn-home',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf, NgOptimizedImage, RouterLink, HeaderComponent],
+  imports: [FormsModule, NgFor, NgIf, RouterLink, HeaderComponent],
   template: `
     <utn-header />
     <main class="page home">
       <section class="hero home-hero">
         <div class="home-hero-slides">
-          <img *ngFor="let image of heroImages; let index = index" [class.active]="index === activeHeroSlide" [attr.aria-hidden]="index !== activeHeroSlide ? 'true' : null" fill [ngSrc]="image.src" [priority]="index === 0" [alt]="image.alt">
+          <img *ngFor="let image of heroImages; let index = index" [class.active]="index === activeHeroSlide" [attr.aria-hidden]="index !== activeHeroSlide ? 'true' : null" [src]="image" [alt]="heroImageAlts[index]">
         </div>
         <div class="home-hero-content">
           <p class="eyebrow">Universidad Tecnológica Nacional · FRSN</p>
@@ -100,15 +100,26 @@ export class HomeComponent implements OnDestroy {
   searchHints = ['Vinculación', 'LEA', 'Extensión', 'Investigación'];
   activeHeroSlide = 0;
   heroImages = [
-    { src: '/secretaria-extension-universitaria-main/assets/FONDO%20UTN.jpg', alt: 'Vista del edificio de la UTN Facultad Regional San Nicolás y su entrada principal.' },
-    { src: '/vinculacion/assets/FONDO%20UTN.jpg', alt: 'Participantes de una capacitación técnica en un aula.' },
-    { src: '/vinculacion/assets/asesoramiento-tecnico.jpg', alt: 'Una persona brinda una capacitación a un grupo de asistentes.' },
-    { src: '/vinculacion/assets/capacitaciones-in-company.jpg', alt: 'Equipo de trabajo participa en una reunión de planificación.' },
-    { src: '/vinculacion/assets/capacitaciones-abiertas.jpg', alt: 'Personas asisten a una capacitación en un aula.' },
-    { src: '/vinculacion/assets/centro-soldadura.jpg', alt: 'Operario realiza una soldadura y genera chispas en un taller.' },
-    { src: '/vinculacion/assets/certificacion-oficios.jpg', alt: 'Participantes realizan una práctica de soldadura en un taller.' },
-    { src: '/vinculacion/assets/citi.png', alt: 'Cartel de la Universidad Tecnológica Nacional frente al edificio de la Facultad Regional San Nicolás.' },
-    { src: '/vinculacion/assets/auditoria-tanques.jpg', alt: 'Tanques industriales de almacenamiento en una planta.' }
+    '/secretaria-extension-universitaria-main/assets/FONDO%20UTN.jpg',
+    '/vinculacion/assets/FONDO%20UTN.jpg',
+    '/vinculacion/assets/asesoramiento-tecnico.jpg',
+    '/vinculacion/assets/capacitaciones-in-company.jpg',
+    '/vinculacion/assets/capacitaciones-abiertas.jpg',
+    '/vinculacion/assets/centro-soldadura.jpg',
+    '/vinculacion/assets/certificacion-oficios.jpg',
+    '/vinculacion/assets/citi.png',
+    '/vinculacion/assets/auditoria-tanques.jpg'
+  ];
+  heroImageAlts = [
+    'Vista del edificio de la UTN Facultad Regional San Nicolás y su entrada principal.',
+    'Participantes de una capacitación técnica en un aula.',
+    'Una persona brinda una capacitación a un grupo de asistentes.',
+    'Equipo de trabajo participa en una reunión de planificación.',
+    'Personas asisten a una capacitación en un aula.',
+    'Operario realiza una soldadura y genera chispas en un taller.',
+    'Participantes realizan una práctica de soldadura en un taller.',
+    'Cartel de la Universidad Tecnológica Nacional frente al edificio de la Facultad Regional San Nicolás.',
+    'Tanques industriales de almacenamiento en una planta.'
   ];
   private readonly heroSlideTimer = window.setInterval(() => {
     this.activeHeroSlide = (this.activeHeroSlide + 1) % this.heroImages.length;

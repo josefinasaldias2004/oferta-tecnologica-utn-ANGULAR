@@ -173,7 +173,11 @@ a {
 }
 .page > .hero.compact {
   width: 100vw;
+  min-height: 500px;
   margin-left: calc(50% - 50vw);
+  padding: 64px max(6vw, calc((100vw - 1180px) / 2));
+  display: flex;
+  align-items: center;
 }
 .service-image-hero::before,
 .service-hero-background {
@@ -241,7 +245,7 @@ a {
   isolation: isolate;
   overflow: hidden;
   display: grid;
-  min-height: 444px;
+  min-height: max(444px, 66.8vw);
   place-items: center;
   padding: 64px 6vw;
   color: white;
@@ -268,19 +272,16 @@ a {
 }
 .home-hero-slides img {
   position: absolute;
-  inset: 0;
+  top: 50%;
+  left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   opacity: 0;
-  transform: scale(1.04);
-  transition:
-    opacity 900ms ease,
-    transform 6s ease;
+  transform: translateY(-50%);
+  transition: opacity 900ms ease;
 }
 .home-hero-slides img.active {
   opacity: 1;
-  transform: scale(1);
 }
 .home-hero-content {
   position: relative;
@@ -917,6 +918,10 @@ button {
 :root.dark-theme .search-box .mat-mdc-form-field-focus-overlay {
   background: transparent;
 }
+.home .tile img {
+  height: auto;
+  object-fit: contain;
+}
 :root.dark-theme .image-hero {
   background:
     linear-gradient(135deg, #071428dd, #173b5cdd),
@@ -1006,6 +1011,9 @@ button {
   color: #ffffff;
 }
 @media (max-width: 760px) {
+  .page > .hero.compact {
+    padding: 38px 5vw 34px;
+  }
   .lea-page .lea-hero {
     min-height: 680px;
     padding: 40px 5vw;
@@ -1195,7 +1203,7 @@ button {
     font-size: clamp(2.2rem, 12vw, 3.4rem);
   }
   .home-hero {
-    min-height: 400px;
+    min-height: max(400px, 66.8vw);
     padding: 56px 5vw;
   }
   .hero p:not(.eyebrow),
@@ -2047,7 +2055,7 @@ button {
   display: block;
   width: calc(100% + 32px);
   max-width: none;
-  height: 176px;
+  height: clamp(240px, 22vw, 300px);
   margin: 12px -16px 6px;
   object-fit: cover;
   background: #e7f0f8;

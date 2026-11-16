@@ -159,7 +159,7 @@ a {
   font-size: 1.1rem;
   line-height: 1.7;
 }
-.hero:not(.home-hero) {
+.hero:not(.home-hero):not(.service-hero):not(.vinc-hero) {
   background: linear-gradient(135deg, #e7f0ff, #fff8f0);
 }
 .service-image-hero {
@@ -245,7 +245,7 @@ a {
   isolation: isolate;
   overflow: hidden;
   display: grid;
-  min-height: max(444px, 66.8vw);
+  min-height: clamp(400px, 52vw, 760px);
   place-items: center;
   padding: 64px 6vw;
   color: white;
@@ -272,12 +272,13 @@ a {
 }
 .home-hero-slides img {
   position: absolute;
-  top: 50%;
-  left: 0;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
   opacity: 0;
-  transform: translateY(-50%);
   transition: opacity 900ms ease;
 }
 .home-hero-slides img.active {
@@ -808,7 +809,7 @@ button {
   color: var(--blue);
   font-weight: 700;
 }
-:root.dark-theme .hero:not(.image-hero),
+:root.dark-theme .hero:not(.image-hero):not(.home-hero):not(.service-hero):not(.vinc-hero),
 :root.dark-theme .content,
 :root.dark-theme .research-content {
   background: var(--paper);
@@ -823,7 +824,7 @@ button {
   color: var(--muted);
 }
 :root.dark-theme .home-hero {
-  background: #071428;
+  background: transparent;
 }
 :root.dark-theme .home-hero p:not(.eyebrow) {
   color: #f5f8fc;
@@ -919,8 +920,9 @@ button {
   background: transparent;
 }
 .home .tile img {
-  height: auto;
-  object-fit: contain;
+  height: clamp(155px, 18vw, 210px);
+  object-fit: cover;
+  object-position: center;
 }
 :root.dark-theme .image-hero {
   background:
@@ -971,7 +973,9 @@ button {
   isolation: isolate;
   display: flex;
   align-items: center;
+  width: 100vw;
   min-height: 560px;
+  margin-left: calc(50% - 50vw);
   overflow: hidden;
   padding: 56px 6vw;
   background: #102a43;
@@ -1203,7 +1207,6 @@ button {
     font-size: clamp(2.2rem, 12vw, 3.4rem);
   }
   .home-hero {
-    min-height: max(400px, 66.8vw);
     padding: 56px 5vw;
   }
   .hero p:not(.eyebrow),

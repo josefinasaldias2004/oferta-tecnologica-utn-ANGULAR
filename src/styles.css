@@ -159,7 +159,7 @@ a {
   font-size: 1.1rem;
   line-height: 1.7;
 }
-.hero {
+.hero:not(.home-hero) {
   background: linear-gradient(135deg, #e7f0ff, #fff8f0);
 }
 .service-image-hero {
@@ -249,7 +249,7 @@ a {
   place-items: center;
   padding: 64px 6vw;
   color: white;
-  background: #071428;
+  background: transparent;
 }
 .home {
   max-width: none;
